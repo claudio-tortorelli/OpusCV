@@ -1,0 +1,7 @@
+- passaggi successivi con findcontours diversi
+- incrementare velocità di scan del video, multithread
+- in debug mode salvare l'istogramma della serie delle immagini simili
+- salvataggio del log sul file dentro la cartella album con dettagli di tempi e setup pc
+- salvare i dati d grabbing del video via via, così se si interrompe, riprende da dove ha lasciato
+- confronto tra pagine selezionate: eliminazione pagine doppie
+
