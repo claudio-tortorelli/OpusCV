@@ -1,6 +1,7 @@
-package claudiosoft.opusCV.steps.image;
+package claudiosoft.opusCV.step.image;
 
-import claudiosoft.opusCV.BasicConsoleLogger;
+import claudiosoft.opusCV.common.BasicConsoleLogger;
+import claudiosoft.opusCV.common.OpusCVException;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
@@ -16,12 +17,12 @@ public class CvtToGrayImageStep extends ImageStep {
     }
 
     @Override
-    public void prepare() throws Exception {
+    public void prepare() throws OpusCVException {
         super.prepare();
     }
 
     @Override
-    public void doProcess() throws Exception {
+    public void doProcess() throws OpusCVException {
         super.doProcess();
         Mat cvtImg = new Mat(image.rows(), image.cols(), CvType.CV_8UC1);
         Imgproc.cvtColor(image, cvtImg, Imgproc.COLOR_BGR2GRAY);
@@ -30,12 +31,12 @@ public class CvtToGrayImageStep extends ImageStep {
     }
 
     @Override
-    public void checkPrerequisites() throws Exception {
+    public void checkPrerequisites() throws OpusCVException {
         super.checkPrerequisites();
     }
 
     @Override
-    public void finalize() throws Exception {
+    public void finalize() throws OpusCVException {
         super.finalize();
     }
 

@@ -1,4 +1,4 @@
-package claudiosoft.opusCV.steps;
+package claudiosoft.opusCV.step;
 
 /**
  *

@@ -1,5 +1,7 @@
-package claudiosoft.opusCV;
+package claudiosoft.opusCV.videoprocessor;
 
+import claudiosoft.opusCV.common.Options;
+import claudiosoft.opusCV.common.BasicConsoleLogger;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.nio.file.Files;

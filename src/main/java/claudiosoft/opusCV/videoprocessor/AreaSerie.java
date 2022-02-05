@@ -1,4 +1,4 @@
-package claudiosoft.opusCV;
+package claudiosoft.opusCV.videoprocessor;
 
 import java.util.ArrayList;
 

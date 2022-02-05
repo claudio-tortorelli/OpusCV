@@ -1,6 +1,7 @@
-package claudiosoft.opusCV.steps;
+package claudiosoft.opusCV.step;
 
-import claudiosoft.opusCV.BasicConsoleLogger;
+import claudiosoft.opusCV.common.BasicConsoleLogger;
+import claudiosoft.opusCV.common.OpusCVException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public abstract class GenericStep implements Step {
     }
 
     @Override
-    public void prepare() throws Exception {
+    public void prepare() throws OpusCVException {
         logger.info("start " + getClass().getSimpleName());
         startTime = System.currentTimeMillis();
         for (GenericStep subStep : subSteps) {
@@ -31,7 +32,7 @@ public abstract class GenericStep implements Step {
     }
 
     @Override
-    public void finalize() throws Exception {
+    public void finalize() throws OpusCVException {
         for (GenericStep subStep : subSteps) {
             subStep.finalize();
         }

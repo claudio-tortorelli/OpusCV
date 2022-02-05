@@ -1,5 +1,6 @@
-package claudiosoft.opusCV;
+package claudiosoft.opusCV.common;
 
+import claudiosoft.opusCV.common.BasicConsoleLogger;
 import java.io.File;
 
 /**

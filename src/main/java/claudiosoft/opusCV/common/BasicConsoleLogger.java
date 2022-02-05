@@ -1,4 +1,4 @@
-package claudiosoft.opusCV;
+package claudiosoft.opusCV.common;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

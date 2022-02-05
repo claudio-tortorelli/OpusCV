@@ -1,8 +1,9 @@
-package claudiosoft.opusCV.steps.image;
+package claudiosoft.opusCV.step.image;
 
-import claudiosoft.opusCV.BasicConsoleLogger;
+import claudiosoft.opusCV.common.BasicConsoleLogger;
+import claudiosoft.opusCV.common.ErrorCode;
+import claudiosoft.opusCV.common.OpusCVException;
 import java.io.File;
-import java.io.IOException;
 import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
 
@@ -22,10 +23,11 @@ public class WriteImageStep extends ImageStep {
     }
 
     @Override
-    public void doProcess() throws Exception {
+    public void doProcess() throws OpusCVException {
         super.doProcess();
         if (outFile.exists() && !overwrite) {
-            throw new IOException("output file already exists: " + outFile.getAbsolutePath());
+            logger.error(String.format("this image can be overridden: %s", outFile.getAbsolutePath()));
+            throw new OpusCVException(ErrorCode.IMG_ALREADY_EXISTS);
         }
         outFile.delete();
         Imgcodecs.imwrite(outFile.getAbsolutePath(), image);
@@ -33,10 +35,10 @@ public class WriteImageStep extends ImageStep {
     }
 
     @Override
-    public void checkPrerequisites() throws Exception {
+    public void checkPrerequisites() throws OpusCVException {
         super.checkPrerequisites();
         if (outFile == null) {
-            throw new IOException("output file not defined");
+            throw new OpusCVException(ErrorCode.IMG_OUTPUT_NOT_DEFINED);
         }
     }
 

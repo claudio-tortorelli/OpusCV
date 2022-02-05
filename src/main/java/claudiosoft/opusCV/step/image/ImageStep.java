@@ -1,8 +1,9 @@
-package claudiosoft.opusCV.steps.image;
+package claudiosoft.opusCV.step.image;
 
-import claudiosoft.opusCV.BasicConsoleLogger;
-import claudiosoft.opusCV.steps.GenericStep;
-import java.io.IOException;
+import claudiosoft.opusCV.common.BasicConsoleLogger;
+import claudiosoft.opusCV.common.ErrorCode;
+import claudiosoft.opusCV.common.OpusCVException;
+import claudiosoft.opusCV.step.GenericStep;
 import org.opencv.core.Mat;
 
 /**
@@ -19,19 +20,19 @@ public class ImageStep extends GenericStep {
     }
 
     @Override
-    public void doProcess() throws Exception {
+    public void doProcess() throws OpusCVException {
 
     }
 
     @Override
-    public void checkPrerequisites() throws Exception {
+    public void checkPrerequisites() throws OpusCVException {
         if (image == null) {
-            throw new IOException("invalid image");
+            throw new OpusCVException(ErrorCode.IMG_INVALID_IMAGE);
         }
     }
 
     @Override
-    public void finalize() throws Exception {
+    public void finalize() throws OpusCVException {
         super.finalize();
         image.release();
     }

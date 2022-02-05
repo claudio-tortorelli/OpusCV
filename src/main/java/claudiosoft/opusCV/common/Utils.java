@@ -1,5 +1,6 @@
-package claudiosoft.opusCV;
+package claudiosoft.opusCV.common;
 
+import claudiosoft.opusCV.common.Constants;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;

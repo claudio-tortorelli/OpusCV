@@ -1,16 +1,26 @@
 package claudiosoft.opusCV;
 
-import claudiosoft.opusCV.steps.check.OpenCVCheckStep;
-import claudiosoft.opusCV.steps.image.CvtToGrayImageStep;
-import claudiosoft.opusCV.steps.image.ResizeImageStep;
-import claudiosoft.opusCV.steps.image.ShowImageStep;
-import claudiosoft.opusCV.steps.video.Video2PicStep;
+import claudiosoft.opusCV.common.BasicConsoleLogger;
+import claudiosoft.opusCV.common.Constants;
+import claudiosoft.opusCV.common.Options;
+import claudiosoft.opusCV.step.image.CvtToGrayImageStep;
+import claudiosoft.opusCV.step.image.ResizeImageStep;
+import claudiosoft.opusCV.step.image.ShowImageStep;
+import claudiosoft.opusCV.step.initialization.OpenCVInitStep;
+import claudiosoft.opusCV.step.video.Video2PicStep;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import org.opencv.core.Core;
 
 /**
+ * TODO: error code enum
+ *
+ * opus cv exception con dettagli e print nel logger
+ *
+ * parser json input
+ *
+ * astrazione verso comandi opencv negli step in previsione di usare altr
  *
  * @author Claudio
  */
@@ -62,7 +72,7 @@ public class Main {
             logger = new BasicConsoleLogger(opts.getLoggerLevel());
 
             Processor process = new Processor(opts);
-            process.addStep(new OpenCVCheckStep(logger)); // test only
+            process.addStep(new OpenCVInitStep(logger));
             if (opts.getFile() != null && opts.getFrameFolder() == null) {
                 Video2PicStep videoStep = new Video2PicStep(opts.getFile(), opts.getOutFolder(), logger);
                 if (opts.getStartFrame() >= 0) {
@@ -82,14 +92,6 @@ public class Main {
             }
             // start process
             process.doProcess();
-
-            if (opts.getFrameFolder() != null) {
-                PageSelector pageSelector = new PageSelector(opts, logger);
-                pageSelector.doProcess();
-
-                FrameExtractor frameExtrator = new FrameExtractor(opts, logger);
-                frameExtrator.doProcess();
-            }
         } catch (Exception ex) {
             if (logger != null) {
                 logger.error(ex.getMessage(), ex);

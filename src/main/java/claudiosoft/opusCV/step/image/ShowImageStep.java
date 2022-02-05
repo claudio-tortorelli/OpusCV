@@ -1,6 +1,7 @@
-package claudiosoft.opusCV.steps.image;
+package claudiosoft.opusCV.step.image;
 
-import claudiosoft.opusCV.BasicConsoleLogger;
+import claudiosoft.opusCV.common.BasicConsoleLogger;
+import claudiosoft.opusCV.common.OpusCVException;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
@@ -40,14 +41,14 @@ public class ShowImageStep extends ImageStep {
     }
 
     @Override
-    public void prepare() throws Exception {
+    public void prepare() throws OpusCVException {
         super.prepare();
         HighGui.namedWindow(this.windowName, this.winType.ordinal());
         logger.debug("'" + windowName + "' window created");
     }
 
     @Override
-    public void doProcess() throws Exception {
+    public void doProcess() throws OpusCVException {
         super.doProcess();
         HighGui.imshow(this.windowName, image);
         if (!text.isEmpty()) {
@@ -58,12 +59,12 @@ public class ShowImageStep extends ImageStep {
     }
 
     @Override
-    public void checkPrerequisites() throws Exception {
+    public void checkPrerequisites() throws OpusCVException {
         super.checkPrerequisites();
     }
 
     @Override
-    public void finalize() throws Exception {
+    public void finalize() throws OpusCVException {
         super.finalize();
         HighGui.destroyWindow(windowName);
         logger.debug("'" + windowName + "' window destroyed");

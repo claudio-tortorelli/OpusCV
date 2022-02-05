@@ -1,10 +1,11 @@
-package claudiosoft.opusCV.steps.video;
+package claudiosoft.opusCV.step.video;
 
-import claudiosoft.opusCV.BasicConsoleLogger;
-import claudiosoft.opusCV.steps.GenericStep;
-import claudiosoft.opusCV.steps.image.ImageStep;
+import claudiosoft.opusCV.common.BasicConsoleLogger;
+import claudiosoft.opusCV.common.ErrorCode;
+import claudiosoft.opusCV.common.OpusCVException;
+import claudiosoft.opusCV.step.GenericStep;
+import claudiosoft.opusCV.step.image.ImageStep;
 import java.io.File;
-import java.io.IOException;
 import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
 import static org.opencv.videoio.Videoio.CAP_PROP_FRAME_COUNT;
@@ -28,13 +29,13 @@ public class VideoGrabberStep extends VideoStep {
     }
 
     @Override
-    public void doProcess() throws Exception {
+    public void doProcess() throws OpusCVException {
         super.doProcess();
         logger.info("processing " + video.getAbsolutePath());
 
         VideoCapture cap = new VideoCapture(video.getAbsolutePath());
         if (!cap.isOpened()) {
-            throw new IOException("Cannot open the video file");
+            throw new OpusCVException(ErrorCode.VID_CANNOT_OPEN);
         }
         int totFrame = (int) cap.get(CAP_PROP_FRAME_COUNT);
         if (endFrame == Integer.MAX_VALUE) {
@@ -80,12 +81,12 @@ public class VideoGrabberStep extends VideoStep {
     }
 
     @Override
-    public void checkPrerequisites() throws Exception {
+    public void checkPrerequisites() throws OpusCVException {
         if (startFrame >= endFrame) {
-            throw new Exception("Invalid frame range");
+            throw new OpusCVException(ErrorCode.VID_INVALID_FRAME_RANGE);
         }
         if (stepFrame < 1) {
-            throw new Exception("Invalid frame step value");
+            throw new OpusCVException(ErrorCode.VID_INVALID_FRAME_STEP);
         }
         super.checkPrerequisites();
     }

@@ -1,6 +1,7 @@
-package claudiosoft.opusCV.steps.image;
+package claudiosoft.opusCV.step.image;
 
-import claudiosoft.opusCV.BasicConsoleLogger;
+import claudiosoft.opusCV.common.BasicConsoleLogger;
+import claudiosoft.opusCV.common.OpusCVException;
 import org.opencv.core.Mat;
 
 /**
@@ -18,24 +19,24 @@ public class ThresholdImageStep extends ImageStep {
     }
 
     @Override
-    public void prepare() throws Exception {
+    public void prepare() throws OpusCVException {
         super.prepare();
     }
 
     @Override
-    public void doProcess() throws Exception {
+    public void doProcess() throws OpusCVException {
         super.doProcess();
 
         logger.debug("");
     }
 
     @Override
-    public void checkPrerequisites() throws Exception {
+    public void checkPrerequisites() throws OpusCVException {
         super.checkPrerequisites();
     }
 
     @Override
-    public void finalize() throws Exception {
+    public void finalize() throws OpusCVException {
         super.finalize();
     }
 
