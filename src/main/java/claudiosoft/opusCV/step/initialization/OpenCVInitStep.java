@@ -5,6 +5,8 @@ import claudiosoft.opusCV.common.BasicConsoleLogger;
 import claudiosoft.opusCV.common.ErrorCode;
 import claudiosoft.opusCV.common.OpusCVException;
 import claudiosoft.opusCV.step.GenericStep;
+import java.io.IOException;
+import java.io.Writer;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 
@@ -33,5 +35,15 @@ public class OpenCVInitStep extends GenericStep {
         if (!OpenCVNative.isLoaded()) {
             throw new OpusCVException(ErrorCode.INIT_OPENCV_NOT_LOADED);
         }
+    }
+
+    @Override
+    public String toJson() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void toJson(Writer writer) throws IOException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
