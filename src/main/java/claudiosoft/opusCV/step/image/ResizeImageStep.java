@@ -1,6 +1,5 @@
 package claudiosoft.opusCV.step.image;
 
-import claudiosoft.opusCV.common.BasicConsoleLogger;
 import claudiosoft.opusCV.common.OpusCVException;
 import org.opencv.core.Mat;
 import org.opencv.core.Size;
@@ -16,14 +15,14 @@ public class ResizeImageStep extends ImageStep {
     private final int MAX_PIX = 20000;
     private double ratio = 1.0;
 
-    public ResizeImageStep(double width, double height, Mat image, BasicConsoleLogger logger) {
-        super(image, logger);
+    public ResizeImageStep(double width, double height, Mat image) {
+        super(image);
         //force dims between 1 and MAX_PIX
         this.dims = new Size(Double.min(Double.max(1.0, width), MAX_PIX), Double.min(Double.max(1, height), MAX_PIX));
     }
 
-    public ResizeImageStep(double ratio, Mat image, BasicConsoleLogger logger) {
-        super(image, logger);
+    public ResizeImageStep(double ratio, Mat image) {
+        super(image);
         this.ratio = ratio;
         this.dims = null;
     }

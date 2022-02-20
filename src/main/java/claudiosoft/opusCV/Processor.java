@@ -1,9 +1,9 @@
 package claudiosoft.opusCV;
 
-import claudiosoft.opusCV.common.BasicConsoleLogger;
 import claudiosoft.opusCV.common.Options;
 import claudiosoft.opusCV.common.OpusCVException;
-import claudiosoft.opusCV.step.GenericStep;
+import claudiosoft.opusCV.logger.BasicConsoleLogger;
+import claudiosoft.opusCV.step.BaseStep;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,20 +14,20 @@ import java.util.List;
 public class Processor {
 
     private final Options options;
-    private List<GenericStep> steps;
+    private List<BaseStep> steps;
     private BasicConsoleLogger logger;
 
     public Processor(Options opts) {
         this.options = opts;
         this.steps = new LinkedList<>();
-        this.logger = new BasicConsoleLogger(this.options.getLoggerLevel());
+        this.logger = BasicConsoleLogger.get();
     }
 
     public Options getOptions() {
         return options;
     }
 
-    public void addStep(GenericStep step) {
+    public void addStep(BaseStep step) {
         steps.add(step);
         logger.info(step.getClass().getSimpleName() + " added to process");
     }
@@ -35,7 +35,7 @@ public class Processor {
     public void doProcess() throws OpusCVException {
         logger.info("start main process");
         long startTime = System.currentTimeMillis();
-        for (GenericStep step : steps) {
+        for (BaseStep step : steps) {
             step.prepare();
             step.checkPrerequisites();
             step.doProcess();

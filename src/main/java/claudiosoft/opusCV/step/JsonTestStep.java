@@ -1,12 +1,10 @@
-package test.opusCV.json;
+package claudiosoft.opusCV.step;
 
-import claudiosoft.opusCV.common.BasicConsoleLogger;
+import claudiosoft.opusCV.common.Keys;
 import claudiosoft.opusCV.common.OpusCVException;
 import claudiosoft.opusCV.common.StepType;
-import claudiosoft.opusCV.step.GenericStep;
 import com.github.cliftonlabs.json_simple.JsonObject;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.io.Writer;
 import java.util.List;
 
@@ -14,29 +12,30 @@ import java.util.List;
  *
  * @author Claudio
  */
-public class JsonSimpleBean extends GenericStep {
+public class JsonTestStep extends BaseStep {
 
     private String name;
     private int count;
     private double precision;
     private List<Integer> listInt;
 
-    public JsonSimpleBean() {
-        this(null);
+    public JsonTestStep() {
+        this(null, 0, 0.0, null);
     }
 
-    public JsonSimpleBean(BasicConsoleLogger logger) {
-        this(logger, null, 0, 0.0, null);
-    }
-
-    public JsonSimpleBean(BasicConsoleLogger logger, String name, int count, double precision, List<Integer> listInt) {
-        super(logger);
+    public JsonTestStep(String name, int count, double precision, List<Integer> listInt) {
+        super();
         this.type = StepType.TEST;
         this.stepCount = 0;
         this.name = name;
         this.count = count;
         this.precision = precision;
         this.listInt = listInt;
+    }
+
+    public JsonTestStep(JsonObject json) throws IOException {
+        super(json);
+        fromJson(json);
     }
 
     public String getName() {
@@ -72,24 +71,23 @@ public class JsonSimpleBean extends GenericStep {
     }
 
     @Override
-    public String toJson() {
-        final StringWriter writable = new StringWriter();
-        try {
-            this.toJson(writable);
-        } catch (final IOException e) {
-        }
-        return writable.toString();
-    }
-
-    @Override
     public void toJson(Writer writer) throws IOException {
-        super.toJson(writer);
-        final JsonObject json = new JsonObject();
+        JsonObject json = new JsonObject();
+        super.toJson(json);
         json.put("name", this.getName());
         json.put("count", this.getCount());
         json.put("precision", this.getPrecision());
         json.put("list_int", this.getListInt());
         json.toJson(writer);
+    }
+
+    @Override
+    protected void fromJson(JsonObject json) throws IOException {
+        super.fromJson(json);
+        name = json.getString(Keys.NAME);
+        count = json.getInteger(Keys.COUNT);
+        precision = json.getDouble(Keys.PRECISION);
+        listInt = json.getCollection(Keys.LIST_INT);
     }
 
     @Override

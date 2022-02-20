@@ -1,4 +1,4 @@
-package claudiosoft.opusCV.common;
+package claudiosoft.opusCV.logger;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,16 +20,24 @@ public class BasicConsoleLogger {
     }
     private Logger internalLogger = null;
     private LogLevel level = LogLevel.NORMAL;
+    private static BasicConsoleLogger consoleLogger = null;
 
-    public BasicConsoleLogger() {
-        this(LogLevel.NORMAL);
+    public static BasicConsoleLogger get() {
+        return get(LogLevel.NORMAL);
     }
 
-    public BasicConsoleLogger(LogLevel level) {
-        this(LogLevel.NORMAL, "Logger");
+    public static BasicConsoleLogger get(LogLevel level) {
+        return get(LogLevel.NORMAL, "Logger");
     }
 
-    public BasicConsoleLogger(LogLevel level, String logName) {
+    public static BasicConsoleLogger get(LogLevel level, String logName) {
+        if (consoleLogger == null) {
+            consoleLogger = new BasicConsoleLogger(level, logName);
+        }
+        return consoleLogger;
+    }
+
+    private BasicConsoleLogger(LogLevel level, String logName) {
         internalLogger = Logger.getLogger(logName);
         internalLogger.setLevel(Level.FINER);
         this.level = level;

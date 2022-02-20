@@ -1,9 +1,8 @@
 package claudiosoft.opusCV.step.video;
 
-import claudiosoft.opusCV.common.BasicConsoleLogger;
 import claudiosoft.opusCV.common.ErrorCode;
 import claudiosoft.opusCV.common.OpusCVException;
-import claudiosoft.opusCV.step.GenericStep;
+import claudiosoft.opusCV.step.BaseStep;
 import claudiosoft.opusCV.step.image.ImageStep;
 import java.io.File;
 import org.opencv.core.Mat;
@@ -21,8 +20,8 @@ public class VideoGrabberStep extends VideoStep {
     protected int endFrame;
     protected int stepFrame;
 
-    public VideoGrabberStep(File video, BasicConsoleLogger logger) {
-        super(video, logger);
+    public VideoGrabberStep(File video) {
+        super(video);
         startFrame = 0;
         endFrame = Integer.MAX_VALUE;
         stepFrame = 1;
@@ -59,7 +58,7 @@ public class VideoGrabberStep extends VideoStep {
                 logger.debug("processing frame " + frame_count);
 
                 Mat workImage = null;
-                for (GenericStep subStep : subSteps) {
+                for (BaseStep subStep : subSteps) {
                     if (!ImageStep.class.isAssignableFrom(subStep.getClass())) {
                         continue; //skip
                     }

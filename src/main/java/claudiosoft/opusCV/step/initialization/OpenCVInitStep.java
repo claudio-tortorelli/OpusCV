@@ -1,10 +1,9 @@
 package claudiosoft.opusCV.step.initialization;
 
 import claudiosoft.opusCV.OpenCVNative;
-import claudiosoft.opusCV.common.BasicConsoleLogger;
 import claudiosoft.opusCV.common.ErrorCode;
 import claudiosoft.opusCV.common.OpusCVException;
-import claudiosoft.opusCV.step.GenericStep;
+import claudiosoft.opusCV.step.BaseStep;
 import java.io.IOException;
 import java.io.Writer;
 import org.opencv.core.CvType;
@@ -14,10 +13,10 @@ import org.opencv.core.Mat;
  *
  * @author Claudio
  */
-public class OpenCVInitStep extends GenericStep {
+public class OpenCVInitStep extends BaseStep {
 
-    public OpenCVInitStep(BasicConsoleLogger logger) {
-        super(logger);
+    public OpenCVInitStep() {
+        super();
     }
 
     @Override

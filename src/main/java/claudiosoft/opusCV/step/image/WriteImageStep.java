@@ -1,6 +1,5 @@
 package claudiosoft.opusCV.step.image;
 
-import claudiosoft.opusCV.common.BasicConsoleLogger;
 import claudiosoft.opusCV.common.ErrorCode;
 import claudiosoft.opusCV.common.OpusCVException;
 import java.io.File;
@@ -16,8 +15,8 @@ public class WriteImageStep extends ImageStep {
     protected File outFile;
     protected boolean overwrite;
 
-    public WriteImageStep(File outFile, Mat image, BasicConsoleLogger logger) {
-        super(image, logger);
+    public WriteImageStep(File outFile, Mat image) {
+        super(image);
         this.outFile = outFile;
         this.overwrite = true;
     }

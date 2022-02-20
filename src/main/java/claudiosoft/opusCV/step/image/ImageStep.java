@@ -1,9 +1,8 @@
 package claudiosoft.opusCV.step.image;
 
-import claudiosoft.opusCV.common.BasicConsoleLogger;
 import claudiosoft.opusCV.common.ErrorCode;
 import claudiosoft.opusCV.common.OpusCVException;
-import claudiosoft.opusCV.step.GenericStep;
+import claudiosoft.opusCV.step.BaseStep;
 import java.io.IOException;
 import java.io.Writer;
 import org.opencv.core.Mat;
@@ -12,12 +11,12 @@ import org.opencv.core.Mat;
  *
  * @author Claudio
  */
-public class ImageStep extends GenericStep {
+public class ImageStep extends BaseStep {
 
     protected Mat image;
 
-    public ImageStep(Mat image, BasicConsoleLogger logger) {
-        super(logger);
+    public ImageStep(Mat image) {
+        super();
         this.image = image;
     }
 

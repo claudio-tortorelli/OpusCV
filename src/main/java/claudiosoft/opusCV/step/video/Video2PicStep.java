@@ -1,6 +1,5 @@
 package claudiosoft.opusCV.step.video;
 
-import claudiosoft.opusCV.common.BasicConsoleLogger;
 import claudiosoft.opusCV.common.ErrorCode;
 import claudiosoft.opusCV.common.OpusCVException;
 import java.io.File;
@@ -18,8 +17,8 @@ public class Video2PicStep extends VideoGrabberStep {
     private int bufferSize;
     private File outFolder;
 
-    public Video2PicStep(File video, File outFolder, BasicConsoleLogger logger) {
-        super(video, logger);
+    public Video2PicStep(File video, File outFolder) {
+        super(video);
         this.bufferSize = 2;
         this.outFolder = outFolder;
     }

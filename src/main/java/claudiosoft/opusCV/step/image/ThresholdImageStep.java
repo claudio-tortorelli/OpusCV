@@ -1,6 +1,5 @@
 package claudiosoft.opusCV.step.image;
 
-import claudiosoft.opusCV.common.BasicConsoleLogger;
 import claudiosoft.opusCV.common.OpusCVException;
 import org.opencv.core.Mat;
 
@@ -12,8 +11,8 @@ public class ThresholdImageStep extends ImageStep {
 
     private boolean adaptive;
 
-    public ThresholdImageStep(boolean adaptive, Mat image, BasicConsoleLogger logger) {
-        super(image, logger);
+    public ThresholdImageStep(boolean adaptive, Mat image) {
+        super(image);
         //force dims between 1 and MAX_PIX
         this.adaptive = adaptive;
     }

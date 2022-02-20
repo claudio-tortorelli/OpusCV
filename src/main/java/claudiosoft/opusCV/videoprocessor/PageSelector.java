@@ -2,7 +2,7 @@ package claudiosoft.opusCV.videoprocessor;
 
 import claudiosoft.opusCV.common.Options;
 import claudiosoft.opusCV.common.Constants;
-import claudiosoft.opusCV.common.BasicConsoleLogger;
+import claudiosoft.opusCV.logger.BasicConsoleLogger;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;

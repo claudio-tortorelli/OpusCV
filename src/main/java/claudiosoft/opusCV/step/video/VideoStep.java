@@ -1,8 +1,7 @@
 package claudiosoft.opusCV.step.video;
 
-import claudiosoft.opusCV.common.BasicConsoleLogger;
 import claudiosoft.opusCV.common.OpusCVException;
-import claudiosoft.opusCV.step.GenericStep;
+import claudiosoft.opusCV.step.BaseStep;
 import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
@@ -11,12 +10,12 @@ import java.io.Writer;
  *
  * @author Claudio
  */
-public class VideoStep extends GenericStep {
+public class VideoStep extends BaseStep {
 
     protected File video;
 
-    public VideoStep(File video, BasicConsoleLogger logger) {
-        super(logger);
+    public VideoStep(File video) {
+        super();
         this.video = video;
     }
 

@@ -1,8 +1,9 @@
 package claudiosoft.opusCV.step;
 
-import claudiosoft.opusCV.common.BasicConsoleLogger;
+import claudiosoft.opusCV.common.Keys;
 import claudiosoft.opusCV.common.OpusCVException;
 import claudiosoft.opusCV.common.StepType;
+import claudiosoft.opusCV.logger.BasicConsoleLogger;
 import com.github.cliftonlabs.json_simple.JsonObject;
 import com.github.cliftonlabs.json_simple.Jsonable;
 import java.io.IOException;
@@ -15,39 +16,39 @@ import java.util.List;
  *
  * @author Claudio
  */
-public abstract class GenericStep implements Step, Jsonable {
+public abstract class BaseStep implements Step, Jsonable {
 
     private long startTime;
     private long estimatedTime;
 
     protected StepType type;
     protected int stepCount;
-    protected BasicConsoleLogger logger;
-    protected List<GenericStep> subSteps;
+    protected BasicConsoleLogger logger; //TODO, rimuovere da membro
+    protected List<BaseStep> subSteps;
 
-    protected GenericStep() {
-        this(null);
+    protected BaseStep() {
+        this.type = StepType.BASE;
+        this.stepCount = 0;
+        this.logger = BasicConsoleLogger.get();
+        this.subSteps = new LinkedList<>();
     }
 
-    protected GenericStep(BasicConsoleLogger logger) {
-        this.type = StepType.GENERIC;
-        this.stepCount = 0;
-        this.logger = logger;
-        this.subSteps = new LinkedList<>();
+    protected BaseStep(JsonObject json) throws IOException {
+        fromJson(json);
     }
 
     @Override
     public void prepare() throws OpusCVException {
         logger.info("start " + getClass().getSimpleName());
         startTime = System.currentTimeMillis();
-        for (GenericStep subStep : subSteps) {
+        for (BaseStep subStep : subSteps) {
             subStep.prepare();
         }
     }
 
     @Override
     public void finalize() throws OpusCVException {
-        for (GenericStep subStep : subSteps) {
+        for (BaseStep subStep : subSteps) {
             subStep.finalize();
         }
         estimatedTime = System.currentTimeMillis() - startTime;
@@ -72,7 +73,17 @@ public abstract class GenericStep implements Step, Jsonable {
         json.toJson(writer);
     }
 
-    public void addStep(GenericStep step) {
+    protected void toJson(JsonObject json) throws IOException {
+        json.put("type", type.name());
+        json.put("stepCount", stepCount);
+    }
+
+    protected void fromJson(JsonObject json) throws IOException {
+        type = StepType.valueOf(json.getString(Keys.TYPE));
+        stepCount = json.getInteger(Keys.STEPCOUNT);
+    }
+
+    public void addStep(BaseStep step) {
         subSteps.add(step);
     }
 
@@ -96,11 +107,11 @@ public abstract class GenericStep implements Step, Jsonable {
         this.logger = logger;
     }
 
-    public List<GenericStep> getSubSteps() {
+    public List<BaseStep> getSubSteps() {
         return subSteps;
     }
 
-    public void setSubSteps(List<GenericStep> subSteps) {
+    public void setSubSteps(List<BaseStep> subSteps) {
         this.subSteps = subSteps;
     }
 

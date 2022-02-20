@@ -3,7 +3,11 @@
  */
 package test.opusCV.json;
 
+import claudiosoft.opusCV.common.StepType;
+import claudiosoft.opusCV.step.JsonTestStep;
+import claudiosoft.opusCV.step.StepFactory;
 import com.github.cliftonlabs.json_simple.JsonException;
+import com.github.cliftonlabs.json_simple.JsonObject;
 import com.github.cliftonlabs.json_simple.Jsoner;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,17 +38,17 @@ public class JsonSimpleTests extends BaseJUnitTest {
         array.add(1);
         array.add(2);
         array.add(3);
-        JsonSimpleBean bean = new JsonSimpleBean(null, "test", 0, 0.1, array);
+        JsonTestStep bean = new JsonTestStep("test", 0, 0.1, array);
 
         String json = Jsoner.serialize(bean);
 
         // pretty print
         json = Jsoner.prettyPrint(json);
-
         System.out.println(json);
 
-        Object testBean = Jsoner.deserialize(json);
-        if (testBean instanceof JsonSimpleBean) {
+        JsonObject testBean = (JsonObject) Jsoner.deserialize(json);
+        if (testBean.get("type").equals(StepType.TEST.name())) {
+            JsonTestStep deserialized = (JsonTestStep) StepFactory.get(testBean);
             Assert.assertTrue(true);
         }
     }

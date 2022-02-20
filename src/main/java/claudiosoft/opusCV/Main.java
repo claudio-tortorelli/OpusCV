@@ -1,8 +1,8 @@
 package claudiosoft.opusCV;
 
-import claudiosoft.opusCV.common.BasicConsoleLogger;
 import claudiosoft.opusCV.common.Constants;
 import claudiosoft.opusCV.common.Options;
+import claudiosoft.opusCV.logger.BasicConsoleLogger;
 import claudiosoft.opusCV.step.image.CvtToGrayImageStep;
 import claudiosoft.opusCV.step.image.ResizeImageStep;
 import claudiosoft.opusCV.step.image.ShowImageStep;
@@ -69,12 +69,12 @@ public class Main {
         }
 
         try {
-            logger = new BasicConsoleLogger(opts.getLoggerLevel());
+            logger = BasicConsoleLogger.get(opts.getLoggerLevel());
 
             Processor process = new Processor(opts);
-            process.addStep(new OpenCVInitStep(logger));
+            process.addStep(new OpenCVInitStep());
             if (opts.getFile() != null && opts.getFrameFolder() == null) {
-                Video2PicStep videoStep = new Video2PicStep(opts.getFile(), opts.getOutFolder(), logger);
+                Video2PicStep videoStep = new Video2PicStep(opts.getFile(), opts.getOutFolder());
                 if (opts.getStartFrame() >= 0) {
                     videoStep.setStartFrame(opts.getStartFrame());
                 }
@@ -84,10 +84,10 @@ public class Main {
                 if (opts.getStepFrame() >= 0) {
                     videoStep.setStepFrame(opts.getStepFrame());
                 }
-                videoStep.addStep(new ResizeImageStep(0.7, null, logger));
-                videoStep.addStep(new ShowImageStep("OpusCV - Videograbbing", null, logger));
-                videoStep.addStep(new ResizeImageStep(0.7, null, logger));
-                videoStep.addStep(new CvtToGrayImageStep(null, logger));
+                videoStep.addStep(new ResizeImageStep(0.7, null));
+                videoStep.addStep(new ShowImageStep("OpusCV - Videograbbing", null));
+                videoStep.addStep(new ResizeImageStep(0.7, null));
+                videoStep.addStep(new CvtToGrayImageStep(null));
                 process.addStep(videoStep);
             }
             // start process

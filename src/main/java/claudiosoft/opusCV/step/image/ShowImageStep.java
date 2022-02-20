@@ -1,6 +1,5 @@
 package claudiosoft.opusCV.step.image;
 
-import claudiosoft.opusCV.common.BasicConsoleLogger;
 import claudiosoft.opusCV.common.OpusCVException;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -25,16 +24,16 @@ public class ShowImageStep extends ImageStep {
         AUTOSIZE
     }
 
-    public ShowImageStep(String windowName, Mat image, BasicConsoleLogger logger) {
-        this(windowName, WinType.NORMAL, 24, image, logger);
+    public ShowImageStep(String windowName, Mat image) {
+        this(windowName, WinType.NORMAL, 24, image);
     }
 
-    public ShowImageStep(String windowName, WinType winType, Mat image, BasicConsoleLogger logger) {
-        this(windowName, winType, 24, image, logger);
+    public ShowImageStep(String windowName, WinType winType, Mat image) {
+        this(windowName, winType, 24, image);
     }
 
-    public ShowImageStep(String windowName, WinType winType, int frameRate, Mat image, BasicConsoleLogger logger) {
-        super(image, logger);
+    public ShowImageStep(String windowName, WinType winType, int frameRate, Mat image) {
+        super(image);
         this.windowName = windowName;
         this.winType = winType;
         this.frameRate = Integer.max(0, frameRate);
