@@ -31,7 +31,8 @@ public abstract class BaseStep implements Step, Jsonable {
     }
 
     protected BaseStep(JsonObject json) throws IOException {
-        fromJson(json);
+        type = StepType.valueOf(json.getString(Keys.TYPE));
+        index = json.getInteger(Keys.INDEX);
     }
 
     @Override
@@ -67,11 +68,6 @@ public abstract class BaseStep implements Step, Jsonable {
     protected void toJson(JsonObject json) throws IOException {
         json.put(Keys.TYPE, type.name());
         json.put(Keys.INDEX, index);
-    }
-
-    protected void fromJson(JsonObject json) throws IOException {
-        type = StepType.valueOf(json.getString(Keys.TYPE));
-        index = json.getInteger(Keys.INDEX);
     }
 
     public StepType getType() {

@@ -35,7 +35,10 @@ public class JsonTestStep extends BaseStep {
 
     public JsonTestStep(JsonObject json) throws IOException {
         super(json);
-        fromJson(json);
+        name = json.getString(Keys.TEST_NAME);
+        counter = json.getInteger(Keys.TEST_COUNT);
+        precision = json.getDouble(Keys.TEST_PRECISION);
+        listInt = json.getCollection(Keys.TEST_LIST_INT);
     }
 
     public String getName() {
@@ -79,15 +82,6 @@ public class JsonTestStep extends BaseStep {
         json.put(Keys.TEST_PRECISION, this.getPrecision());
         json.put(Keys.TEST_LIST_INT, this.getListInt());
         json.toJson(writer);
-    }
-
-    @Override
-    protected void fromJson(JsonObject json) throws IOException {
-        super.fromJson(json);
-        name = json.getString(Keys.TEST_NAME);
-        counter = json.getInteger(Keys.TEST_COUNT);
-        precision = json.getDouble(Keys.TEST_PRECISION);
-        listInt = json.getCollection(Keys.TEST_LIST_INT);
     }
 
     @Override
