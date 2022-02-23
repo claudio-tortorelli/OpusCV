@@ -3,6 +3,7 @@
  */
 package test.opusCV.json;
 
+import claudiosoft.opusCV.common.Keys;
 import claudiosoft.opusCV.common.StepType;
 import claudiosoft.opusCV.step.JsonTestStep;
 import claudiosoft.opusCV.step.StepFactory;
@@ -10,8 +11,6 @@ import com.github.cliftonlabs.json_simple.JsonException;
 import com.github.cliftonlabs.json_simple.JsonObject;
 import com.github.cliftonlabs.json_simple.Jsoner;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -34,11 +33,7 @@ public class JsonSimpleTests extends BaseJUnitTest {
 
     @Test
     public void tSerializeDeserizalize() throws IOException, InterruptedException, JsonException {
-        List<Integer> array = new ArrayList();
-        array.add(1);
-        array.add(2);
-        array.add(3);
-        JsonTestStep bean = new JsonTestStep("test", 0, 0.1, array);
+        JsonTestStep bean = new JsonTestStep();
 
         String json = Jsoner.serialize(bean);
 
@@ -47,9 +42,10 @@ public class JsonSimpleTests extends BaseJUnitTest {
         System.out.println(json);
 
         JsonObject testBean = (JsonObject) Jsoner.deserialize(json);
-        if (testBean.get("type").equals(StepType.TEST.name())) {
+        final String type = testBean.getString(Keys.TYPE);
+        if (type.equals(StepType.TEST.name())) {
             JsonTestStep deserialized = (JsonTestStep) StepFactory.get(testBean);
-            Assert.assertTrue(true);
+            Assert.assertTrue(deserialized != null);
         }
     }
 

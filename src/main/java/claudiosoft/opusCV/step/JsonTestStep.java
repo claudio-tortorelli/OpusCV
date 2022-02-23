@@ -6,6 +6,7 @@ import claudiosoft.opusCV.common.StepType;
 import com.github.cliftonlabs.json_simple.JsonObject;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,21 +15,20 @@ import java.util.List;
  */
 public class JsonTestStep extends BaseStep {
 
-    private String name;
-    private int count;
-    private double precision;
-    private List<Integer> listInt;
+    protected String name;
+    protected int counter;
+    protected double precision;
+    protected List<Integer> listInt;
 
     public JsonTestStep() {
-        this(null, 0, 0.0, null);
+        this("jsonTestStep", 0, 0.0, new ArrayList<Integer>());
     }
 
     public JsonTestStep(String name, int count, double precision, List<Integer> listInt) {
         super();
         this.type = StepType.TEST;
-        this.stepCount = 0;
         this.name = name;
-        this.count = count;
+        this.counter = count;
         this.precision = precision;
         this.listInt = listInt;
     }
@@ -47,11 +47,11 @@ public class JsonTestStep extends BaseStep {
     }
 
     public int getCount() {
-        return count;
+        return counter;
     }
 
     public void setCount(int count) {
-        this.count = count;
+        this.counter = count;
     }
 
     public double getPrecision() {
@@ -74,20 +74,20 @@ public class JsonTestStep extends BaseStep {
     public void toJson(Writer writer) throws IOException {
         JsonObject json = new JsonObject();
         super.toJson(json);
-        json.put("name", this.getName());
-        json.put("count", this.getCount());
-        json.put("precision", this.getPrecision());
-        json.put("list_int", this.getListInt());
+        json.put(Keys.TEST_NAME, this.getName());
+        json.put(Keys.TEST_COUNT, this.getCount());
+        json.put(Keys.TEST_PRECISION, this.getPrecision());
+        json.put(Keys.TEST_LIST_INT, this.getListInt());
         json.toJson(writer);
     }
 
     @Override
     protected void fromJson(JsonObject json) throws IOException {
         super.fromJson(json);
-        name = json.getString(Keys.NAME);
-        count = json.getInteger(Keys.COUNT);
-        precision = json.getDouble(Keys.PRECISION);
-        listInt = json.getCollection(Keys.LIST_INT);
+        name = json.getString(Keys.TEST_NAME);
+        counter = json.getInteger(Keys.TEST_COUNT);
+        precision = json.getDouble(Keys.TEST_PRECISION);
+        listInt = json.getCollection(Keys.TEST_LIST_INT);
     }
 
     @Override

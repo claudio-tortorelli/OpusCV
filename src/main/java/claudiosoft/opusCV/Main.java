@@ -3,11 +3,7 @@ package claudiosoft.opusCV;
 import claudiosoft.opusCV.common.Constants;
 import claudiosoft.opusCV.common.Options;
 import claudiosoft.opusCV.logger.BasicConsoleLogger;
-import claudiosoft.opusCV.step.image.CvtToGrayImageStep;
-import claudiosoft.opusCV.step.image.ResizeImageStep;
-import claudiosoft.opusCV.step.image.ShowImageStep;
 import claudiosoft.opusCV.step.initialization.OpenCVInitStep;
-import claudiosoft.opusCV.step.video.Video2PicStep;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -73,23 +69,7 @@ public class Main {
 
             Processor process = new Processor(opts);
             process.addStep(new OpenCVInitStep());
-            if (opts.getFile() != null && opts.getFrameFolder() == null) {
-                Video2PicStep videoStep = new Video2PicStep(opts.getFile(), opts.getOutFolder());
-                if (opts.getStartFrame() >= 0) {
-                    videoStep.setStartFrame(opts.getStartFrame());
-                }
-                if (opts.getEndFrame() >= 0) {
-                    videoStep.setEndFrame(opts.getEndFrame());
-                }
-                if (opts.getStepFrame() >= 0) {
-                    videoStep.setStepFrame(opts.getStepFrame());
-                }
-                videoStep.addStep(new ResizeImageStep(0.7, null));
-                videoStep.addStep(new ShowImageStep("OpusCV - Videograbbing", null));
-                videoStep.addStep(new ResizeImageStep(0.7, null));
-                videoStep.addStep(new CvtToGrayImageStep(null));
-                process.addStep(videoStep);
-            }
+            //TODO, enable processor's steps
             // start process
             process.doProcess();
         } catch (Exception ex) {

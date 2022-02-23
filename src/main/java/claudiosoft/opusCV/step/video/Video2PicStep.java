@@ -60,7 +60,7 @@ public class Video2PicStep extends VideoGrabberStep {
 //                logger.debug("processing frame " + frame_count);
 //
 //                Mat workImage = null;
-//                for (GenericStep subStep : subSteps) {
+//                for (GenericStep subStep : next) {
 //                    if (ImageStep.class.isAssignableFrom(subStep.getClass())) {
 //                        ImageStep imgStep = ((ImageStep) subStep);
 //                        if (workImage == null) {

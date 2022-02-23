@@ -9,8 +9,6 @@ import com.github.cliftonlabs.json_simple.Jsonable;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  *
@@ -22,15 +20,14 @@ public abstract class BaseStep implements Step, Jsonable {
     private long estimatedTime;
 
     protected StepType type;
-    protected int stepCount;
-    protected BasicConsoleLogger logger; //TODO, rimuovere da membro
-    protected List<BaseStep> subSteps;
+    protected int index;
+    protected BasicConsoleLogger logger;
+//    protected List<BaseStep> subSteps; //TODO?
 
     protected BaseStep() {
         this.type = StepType.BASE;
-        this.stepCount = 0;
+        this.index = 0;
         this.logger = BasicConsoleLogger.get();
-        this.subSteps = new LinkedList<>();
     }
 
     protected BaseStep(JsonObject json) throws IOException {
@@ -41,16 +38,10 @@ public abstract class BaseStep implements Step, Jsonable {
     public void prepare() throws OpusCVException {
         logger.info("start " + getClass().getSimpleName());
         startTime = System.currentTimeMillis();
-        for (BaseStep subStep : subSteps) {
-            subStep.prepare();
-        }
     }
 
     @Override
     public void finalize() throws OpusCVException {
-        for (BaseStep subStep : subSteps) {
-            subStep.finalize();
-        }
         estimatedTime = System.currentTimeMillis() - startTime;
         logger.debug(getClass().getSimpleName() + " done in " + estimatedTime / 1000 + " sec");
     }
@@ -68,51 +59,26 @@ public abstract class BaseStep implements Step, Jsonable {
     @Override
     public void toJson(Writer writer) throws IOException {
         final JsonObject json = new JsonObject();
-        json.put("type", type.name());
-        json.put("stepCount", stepCount);
+        json.put(Keys.TYPE, type.name());
+        json.put(Keys.INDEX, index);
         json.toJson(writer);
     }
 
     protected void toJson(JsonObject json) throws IOException {
-        json.put("type", type.name());
-        json.put("stepCount", stepCount);
+        json.put(Keys.TYPE, type.name());
+        json.put(Keys.INDEX, index);
     }
 
     protected void fromJson(JsonObject json) throws IOException {
         type = StepType.valueOf(json.getString(Keys.TYPE));
-        stepCount = json.getInteger(Keys.STEPCOUNT);
-    }
-
-    public void addStep(BaseStep step) {
-        subSteps.add(step);
+        index = json.getInteger(Keys.INDEX);
     }
 
     public StepType getType() {
         return type;
     }
 
-    public int getStepCount() {
-        return stepCount;
+    public int getIndex() {
+        return index;
     }
-
-    public void setStepCount(int stepCount) {
-        this.stepCount = stepCount;
-    }
-
-    public BasicConsoleLogger getLogger() {
-        return logger;
-    }
-
-    public void setLogger(BasicConsoleLogger logger) {
-        this.logger = logger;
-    }
-
-    public List<BaseStep> getSubSteps() {
-        return subSteps;
-    }
-
-    public void setSubSteps(List<BaseStep> subSteps) {
-        this.subSteps = subSteps;
-    }
-
 }

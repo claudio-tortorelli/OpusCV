@@ -2,8 +2,6 @@ package claudiosoft.opusCV.step.video;
 
 import claudiosoft.opusCV.common.ErrorCode;
 import claudiosoft.opusCV.common.OpusCVException;
-import claudiosoft.opusCV.step.BaseStep;
-import claudiosoft.opusCV.step.image.ImageStep;
 import java.io.File;
 import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
@@ -57,21 +55,21 @@ public class VideoGrabberStep extends VideoStep {
                 }
                 logger.debug("processing frame " + frame_count);
 
-                Mat workImage = null;
-                for (BaseStep subStep : subSteps) {
-                    if (!ImageStep.class.isAssignableFrom(subStep.getClass())) {
-                        continue; //skip
-                    }
-                    ImageStep imgStep = ((ImageStep) subStep);
-                    if (workImage == null) {
-                        imgStep.setImage(frame);
-                    } else {
-                        imgStep.setImage(workImage);
-                    }
-                    imgStep.checkPrerequisites();
-                    imgStep.doProcess();
-                    workImage = imgStep.getImage(); // update work image
-                }
+//                Mat workImage = null;
+//                for (BaseStep subStep : next) {
+//                    if (!ImageStep.class.isAssignableFrom(subStep.getClass())) {
+//                        continue; //skip
+//                    }
+//                    ImageStep imgStep = ((ImageStep) subStep);
+//                    if (workImage == null) {
+//                        imgStep.setImage(frame);
+//                    } else {
+//                        imgStep.setImage(workImage);
+//                    }
+//                    imgStep.checkPrerequisites();
+//                    imgStep.doProcess();
+//                    workImage = imgStep.getImage(); // update work image
+//                }
                 processedFrames++;
             }
         } finally {

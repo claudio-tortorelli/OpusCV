@@ -11,7 +11,7 @@ import org.opencv.core.Mat;
  *
  * @author Claudio
  */
-public class ImageStep extends BaseStep {
+public abstract class ImageStep extends BaseStep {
 
     protected Mat image;
 
@@ -21,15 +21,15 @@ public class ImageStep extends BaseStep {
     }
 
     @Override
-    public void doProcess() throws OpusCVException {
-
-    }
-
-    @Override
     public void checkPrerequisites() throws OpusCVException {
         if (image == null) {
             throw new OpusCVException(ErrorCode.IMG_INVALID_IMAGE);
         }
+    }
+
+    @Override
+    public void doProcess() throws OpusCVException {
+
     }
 
     @Override
