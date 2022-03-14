@@ -1,8 +1,8 @@
 package claudiosoft.opusCV.step;
 
+import claudiosoft.opusCV.common.EngineType;
 import claudiosoft.opusCV.common.Keys;
 import claudiosoft.opusCV.common.OpusCVException;
-import claudiosoft.opusCV.common.StepType;
 import claudiosoft.opusCV.logger.BasicConsoleLogger;
 import com.github.cliftonlabs.json_simple.JsonObject;
 import com.github.cliftonlabs.json_simple.Jsonable;
@@ -22,10 +22,12 @@ public abstract class BaseStep implements Step, Jsonable {
     protected StepType type;
     protected int index;
     protected BasicConsoleLogger logger;
+    protected EngineType engine;
 //    protected List<BaseStep> subSteps; //TODO?
 
     protected BaseStep() {
         this.type = StepType.BASE;
+        this.engine = EngineType.OPENCV;
         this.index = 0;
         this.logger = BasicConsoleLogger.get();
     }
@@ -36,9 +38,19 @@ public abstract class BaseStep implements Step, Jsonable {
     }
 
     @Override
+    public void checkPrerequisites() throws OpusCVException {
+
+    }
+
+    @Override
     public void prepare() throws OpusCVException {
         logger.info("start " + getClass().getSimpleName());
         startTime = System.currentTimeMillis();
+    }
+
+    @Override
+    public void doProcess() throws OpusCVException {
+
     }
 
     @Override
@@ -60,13 +72,13 @@ public abstract class BaseStep implements Step, Jsonable {
     @Override
     public void toJson(Writer writer) throws IOException {
         final JsonObject json = new JsonObject();
-        json.put(Keys.TYPE, type.name());
-        json.put(Keys.INDEX, index);
+        toJson(json);
         json.toJson(writer);
     }
 
     protected void toJson(JsonObject json) throws IOException {
         json.put(Keys.TYPE, type.name());
+        json.put(Keys.ENGINE, engine.name());
         json.put(Keys.INDEX, index);
     }
 
@@ -77,4 +89,9 @@ public abstract class BaseStep implements Step, Jsonable {
     public int getIndex() {
         return index;
     }
+
+    public EngineType getEngine() {
+        return engine;
+    }
+
 }

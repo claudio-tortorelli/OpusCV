@@ -1,5 +1,6 @@
 package claudiosoft.opusCV.common;
 
+import claudiosoft.opusCV.step.StepType;
 import com.github.cliftonlabs.json_simple.JsonKey;
 import com.github.cliftonlabs.json_simple.Jsoner;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 public class Keys {
 
     public static final JsonKey TYPE = Jsoner.mintJsonKey("type", StepType.BASE.name());
+    public static final JsonKey ENGINE = Jsoner.mintJsonKey("engine", EngineType.OPENCV.name());
     public static final JsonKey INDEX = Jsoner.mintJsonKey("index", -1);
 
     public static final JsonKey TEST_NAME = Jsoner.mintJsonKey("name", "");

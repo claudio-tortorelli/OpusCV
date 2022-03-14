@@ -1,6 +1,5 @@
 package claudiosoft.opusCV.common;
 
-import claudiosoft.opusCV.common.Constants;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -61,4 +60,25 @@ public class Utils {
         return sdf.parse(date);
     }
 
+    /**
+     * Supported OS
+     */
+    public static enum OS {
+        WINDOWS,
+        LINUX,
+        OSX,
+        UNKNOWN
+    }
+
+    public static OS getOperatingSystem() {
+        String osName = System.getProperty("os.name").toLowerCase();
+        if (osName.startsWith("mac") || osName.startsWith("darwin")) {
+            return OS.OSX;
+        } else if (osName.startsWith("linux")) {
+            return OS.LINUX;
+        } else if (osName.startsWith("windows")) {
+            return OS.WINDOWS;
+        }
+        return OS.UNKNOWN;
+    }
 }

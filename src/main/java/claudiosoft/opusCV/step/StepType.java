@@ -4,6 +4,8 @@ package claudiosoft.opusCV.step;
  *
  * @author Claudio
  */
-public class StepParams {
-
+public enum StepType {
+    BASE,
+    TEST,
+    IMG,
 }

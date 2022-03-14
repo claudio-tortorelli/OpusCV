@@ -4,7 +4,7 @@ package claudiosoft.opusCV.common;
  *
  * @author Claudio
  */
-public enum StepType {
-    BASE,
-    TEST,
+public enum EngineType {
+    OPENCV,
+    OTHER
 }

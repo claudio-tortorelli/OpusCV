@@ -15,6 +15,10 @@ public abstract class ImageStep extends BaseStep {
 
     protected Mat image;
 
+    public ImageStep(String imageFilePath) {
+
+    }
+
     public ImageStep(Mat image) {
         super();
         this.image = image;
@@ -22,14 +26,20 @@ public abstract class ImageStep extends BaseStep {
 
     @Override
     public void checkPrerequisites() throws OpusCVException {
+        super.checkPrerequisites();
         if (image == null) {
             throw new OpusCVException(ErrorCode.IMG_INVALID_IMAGE);
         }
     }
 
     @Override
-    public void doProcess() throws OpusCVException {
+    public void prepare() throws OpusCVException {
+        super.prepare();
+    }
 
+    @Override
+    public void doProcess() throws OpusCVException {
+        super.doProcess();
     }
 
     @Override

@@ -1,6 +1,5 @@
 package claudiosoft.opusCV;
 
-import claudiosoft.opusCV.common.Options;
 import claudiosoft.opusCV.common.OpusCVException;
 import claudiosoft.opusCV.logger.BasicConsoleLogger;
 import claudiosoft.opusCV.step.BaseStep;
@@ -13,18 +12,12 @@ import java.util.List;
  */
 public class Processor {
 
-    private final Options options;
     private List<BaseStep> steps;
     private BasicConsoleLogger logger;
 
-    public Processor(Options opts) {
-        this.options = opts;
+    public Processor() {
         this.steps = new LinkedList<>();
         this.logger = BasicConsoleLogger.get();
-    }
-
-    public Options getOptions() {
-        return options;
     }
 
     public void addStep(BaseStep step) {
