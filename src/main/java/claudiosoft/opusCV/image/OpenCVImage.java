@@ -9,22 +9,21 @@ import org.opencv.imgcodecs.Imgcodecs;
  */
 public class OpenCVImage extends Image {
 
-    private Mat rawImage;
+    protected Mat rawImage;
 
     public OpenCVImage(String imagePath) {
+        this(Imgcodecs.imread(imagePath));
+    }
+
+    public OpenCVImage(Mat image) {
         super();
-        rawImage = Imgcodecs.imread(imagePath);
+        this.rawImage = image;
         setSize(rawImage.size().width, rawImage.size().height);
         setDepth(rawImage.depth());
     }
 
+    @Override
     public Mat getRaw() {
         return rawImage;
     }
-
-    //TODO...serve?
-    public void setRaw(Mat image) {
-        this.rawImage = image;
-    }
-
 }

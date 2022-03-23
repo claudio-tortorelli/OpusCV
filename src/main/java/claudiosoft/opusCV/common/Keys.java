@@ -14,6 +14,7 @@ public class Keys {
     public static final JsonKey TYPE = Jsoner.mintJsonKey("type", StepType.BASE.name());
     public static final JsonKey ENGINE = Jsoner.mintJsonKey("engine", EngineType.OPENCV.name());
     public static final JsonKey INDEX = Jsoner.mintJsonKey("index", -1);
+    public static final JsonKey PROCESS_FOLDER = Jsoner.mintJsonKey("process_folder", "");
 
     public static final JsonKey TEST_NAME = Jsoner.mintJsonKey("name", "");
     public static final JsonKey TEST_COUNT = Jsoner.mintJsonKey("count", 0);

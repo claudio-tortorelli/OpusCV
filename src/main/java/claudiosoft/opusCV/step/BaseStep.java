@@ -1,20 +1,20 @@
 package claudiosoft.opusCV.step;
 
 import claudiosoft.opusCV.common.EngineType;
+import claudiosoft.opusCV.common.JsonData;
 import claudiosoft.opusCV.common.Keys;
 import claudiosoft.opusCV.common.OpusCVException;
 import claudiosoft.opusCV.logger.BasicConsoleLogger;
+import com.github.cliftonlabs.json_simple.JsonException;
 import com.github.cliftonlabs.json_simple.JsonObject;
-import com.github.cliftonlabs.json_simple.Jsonable;
+import com.github.cliftonlabs.json_simple.Jsoner;
 import java.io.IOException;
-import java.io.StringWriter;
-import java.io.Writer;
 
 /**
  *
  * @author Claudio
  */
-public abstract class BaseStep implements Step, Jsonable {
+public abstract class BaseStep implements Step, JsonData {
 
     private long startTime;
     private long estimatedTime;
@@ -60,26 +60,15 @@ public abstract class BaseStep implements Step, Jsonable {
     }
 
     @Override
-    public String toJson() {
-        final StringWriter writable = new StringWriter();
-        try {
-            this.toJson(writable);
-        } catch (final IOException e) {
-        }
-        return writable.toString();
-    }
-
-    @Override
-    public void toJson(Writer writer) throws IOException {
-        final JsonObject json = new JsonObject();
-        toJson(json);
-        json.toJson(writer);
-    }
-
-    protected void toJson(JsonObject json) throws IOException {
+    public void toJson(JsonObject json) {
         json.put(Keys.TYPE, type.name());
         json.put(Keys.ENGINE, engine.name());
         json.put(Keys.INDEX, index);
+    }
+
+    @Override
+    public JsonObject fromJson(String json) throws JsonException {
+        return (JsonObject) Jsoner.deserialize(json);
     }
 
     public StepType getType() {

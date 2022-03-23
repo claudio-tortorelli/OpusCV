@@ -3,8 +3,6 @@ package claudiosoft.opusCV.step.image;
 import claudiosoft.opusCV.common.ErrorCode;
 import claudiosoft.opusCV.common.OpusCVException;
 import claudiosoft.opusCV.step.BaseStep;
-import java.io.IOException;
-import java.io.Writer;
 import org.opencv.core.Mat;
 
 /**
@@ -58,11 +56,6 @@ public abstract class ImageStep extends BaseStep {
 
     @Override
     public String toJson() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void toJson(Writer writer) throws IOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

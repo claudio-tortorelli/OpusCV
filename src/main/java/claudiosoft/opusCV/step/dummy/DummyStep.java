@@ -1,12 +1,13 @@
 package claudiosoft.opusCV.step.dummy;
 
+import claudiosoft.opusCV.common.ErrorCode;
 import claudiosoft.opusCV.common.Keys;
 import claudiosoft.opusCV.common.OpusCVException;
 import claudiosoft.opusCV.step.BaseStep;
 import claudiosoft.opusCV.step.StepType;
 import com.github.cliftonlabs.json_simple.JsonObject;
 import java.io.IOException;
-import java.io.Writer;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,14 +60,21 @@ public class DummyStep extends BaseStep {
     }
 
     @Override
-    public void toJson(Writer writer) throws IOException {
-        JsonObject json = new JsonObject();
+    public String toJson() throws OpusCVException {
+        final StringWriter writer = new StringWriter();
+        final JsonObject json = new JsonObject();
         super.toJson(json);
         json.put(Keys.TEST_NAME, this.getName());
         json.put(Keys.TEST_COUNT, this.getCount());
         json.put(Keys.TEST_PRECISION, this.getPrecision());
         json.put(Keys.TEST_LIST_INT, this.getListInt());
-        json.toJson(writer);
+        try {
+            json.toJson(writer);
+        } catch (final IOException ex) {
+            logger.error(ex.getMessage(), ex);
+            throw new OpusCVException(ErrorCode.JSON_WRITE);
+        }
+        return writer.toString();
     }
 
     @Override

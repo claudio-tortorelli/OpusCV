@@ -3,8 +3,6 @@ package claudiosoft.opusCV.step.video;
 import claudiosoft.opusCV.common.OpusCVException;
 import claudiosoft.opusCV.step.BaseStep;
 import java.io.File;
-import java.io.IOException;
-import java.io.Writer;
 
 /**
  *
@@ -33,11 +31,6 @@ public class VideoStep extends BaseStep {
 
     @Override
     public String toJson() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void toJson(Writer writer) throws IOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

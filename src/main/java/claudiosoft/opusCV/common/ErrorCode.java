@@ -9,6 +9,8 @@ public enum ErrorCode {
     INIT_ERROR("0100", "generic initialization error"),
     INIT_OPENCV_ERROR("0101", "opencv initialization error"),
     INIT_OPENCV_NOT_LOADED("0102", "OpenCVNative not loaded"),
+    JSON_WRITE("0120", "Error writing object to json"),
+    JSON_READ("0121", "Error reading object from json"),
     UNSUPPORTED_ENGINE("0150", "Unsupported engine"),
     IMG_INVALID_IMAGE("0200", "invalid image"),
     IMG_ALREADY_EXISTS("0201", "output image already exists"),

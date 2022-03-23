@@ -47,4 +47,6 @@ public abstract class Image {
         this.depth = depth;
     }
 
+    abstract public Object getRaw();
+
 }

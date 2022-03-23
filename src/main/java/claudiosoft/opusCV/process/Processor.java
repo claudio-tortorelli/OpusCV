@@ -1,4 +1,4 @@
-package claudiosoft.opusCV;
+package claudiosoft.opusCV.process;
 
 import claudiosoft.opusCV.common.OpusCVException;
 import claudiosoft.opusCV.logger.BasicConsoleLogger;
