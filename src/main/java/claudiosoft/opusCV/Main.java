@@ -6,7 +6,8 @@ import claudiosoft.opusCV.process.Processor;
 import java.io.IOException;
 
 /**
- * TODO:
+ * TODO: eliminazione protected BaseStep() { this(null); } ogni step deve essere
+ * generato solo dal json e nel prepare inizializza gli oggetti interni
  *
  * @author Claudio
  */

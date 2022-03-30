@@ -1,6 +1,7 @@
 package claudiosoft.opusCV.step.image;
 
 import claudiosoft.opusCV.common.OpusCVException;
+import java.io.IOException;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
@@ -11,7 +12,7 @@ import org.opencv.imgproc.Imgproc;
  */
 public class CvtToGrayImageStep extends ImageStep {
 
-    public CvtToGrayImageStep(Mat image) {
+    public CvtToGrayImageStep(Mat image) throws IOException {
         super(image);
     }
 

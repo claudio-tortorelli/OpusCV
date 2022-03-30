@@ -13,7 +13,6 @@ public class VideoStep extends BaseStep {
     protected File video;
 
     public VideoStep(File video) {
-        super();
         this.video = video;
     }
 
@@ -36,11 +35,6 @@ public class VideoStep extends BaseStep {
 
     @Override
     public void finalize() throws OpusCVException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String toJson() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

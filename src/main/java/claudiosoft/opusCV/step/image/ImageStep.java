@@ -14,11 +14,10 @@ public abstract class ImageStep extends BaseStep {
     protected Mat image;
 
     public ImageStep(String imageFilePath) {
-
+        //TODO create mat from path
     }
 
     public ImageStep(Mat image) {
-        super();
         this.image = image;
     }
 
@@ -50,11 +49,6 @@ public abstract class ImageStep extends BaseStep {
 
     public void setImage(Mat image) {
         this.image = image;
-    }
-
-    @Override
-    public String toJson() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

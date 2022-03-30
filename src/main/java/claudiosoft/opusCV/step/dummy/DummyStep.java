@@ -1,13 +1,11 @@
 package claudiosoft.opusCV.step.dummy;
 
-import claudiosoft.opusCV.common.ErrorCode;
 import claudiosoft.opusCV.common.Keys;
 import claudiosoft.opusCV.common.OpusCVException;
 import claudiosoft.opusCV.step.BaseStep;
 import claudiosoft.opusCV.step.StepType;
 import com.github.cliftonlabs.json_simple.JsonObject;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,30 +15,36 @@ import java.util.List;
  */
 public class DummyStep extends BaseStep {
 
-    protected final String name;
-    protected final int counter;
-    protected final double precision;
-    protected final List<Integer> listInt;
+    protected String name;
+    protected int counter;
+    protected double precision;
+    protected List<Integer> listInt;
 
-    public DummyStep() {
-        this("jsonTestStep", 0, 0.0, new ArrayList<Integer>());
+    public DummyStep() throws IOException {
+        this(null);
     }
 
-    public DummyStep(String name, int count, double precision, List<Integer> listInt) {
-        super();
+    public DummyStep(JsonObject jsonIn) throws IOException {
+        super(jsonIn);
         this.type = StepType.TEST;
-        this.name = name;
-        this.counter = count;
-        this.precision = precision;
-        this.listInt = listInt;
-    }
+        this.name = "jsonTestStep";
+        this.counter = 0;
+        this.precision = 0.0;
+        this.listInt = new ArrayList<>();
 
-    public DummyStep(JsonObject json) throws IOException {
-        super(json);
-        name = json.getString(Keys.TEST_NAME);
-        counter = json.getInteger(Keys.TEST_COUNT);
-        precision = json.getDouble(Keys.TEST_PRECISION);
-        listInt = json.getCollection(Keys.TEST_LIST_INT);
+        if (jsonIn != null) {
+            this.name = jsonIn.getString(Keys.TEST_NAME);
+            this.counter = jsonIn.getInteger(Keys.TEST_COUNT);
+            this.precision = jsonIn.getDouble(Keys.TEST_PRECISION);
+            this.listInt = jsonIn.getCollection(Keys.TEST_LIST_INT);
+        }
+        jsonOut.put(Keys.TYPE, this.type.name());
+        jsonOut.put(Keys.ENGINE, this.engine.name());
+        jsonOut.put(Keys.INDEX, this.index);
+        jsonOut.put(Keys.TEST_NAME, this.name);
+        jsonOut.put(Keys.TEST_COUNT, this.counter);
+        jsonOut.put(Keys.TEST_PRECISION, this.precision);
+        jsonOut.put(Keys.TEST_LIST_INT, this.listInt);
     }
 
     public String getName() {
@@ -57,24 +61,6 @@ public class DummyStep extends BaseStep {
 
     public List<Integer> getListInt() {
         return listInt;
-    }
-
-    @Override
-    public String toJson() throws OpusCVException {
-        final StringWriter writer = new StringWriter();
-        final JsonObject json = new JsonObject();
-        super.toJson(json);
-        json.put(Keys.TEST_NAME, this.getName());
-        json.put(Keys.TEST_COUNT, this.getCount());
-        json.put(Keys.TEST_PRECISION, this.getPrecision());
-        json.put(Keys.TEST_LIST_INT, this.getListInt());
-        try {
-            json.toJson(writer);
-        } catch (final IOException ex) {
-            logger.error(ex.getMessage(), ex);
-            throw new OpusCVException(ErrorCode.JSON_WRITE);
-        }
-        return writer.toString();
     }
 
     @Override

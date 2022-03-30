@@ -1,6 +1,7 @@
 package claudiosoft.opusCV.step;
 
 import claudiosoft.opusCV.common.EngineType;
+import claudiosoft.opusCV.common.ErrorCode;
 import claudiosoft.opusCV.common.JsonData;
 import claudiosoft.opusCV.common.Keys;
 import claudiosoft.opusCV.common.OpusCVException;
@@ -9,6 +10,7 @@ import com.github.cliftonlabs.json_simple.JsonException;
 import com.github.cliftonlabs.json_simple.JsonObject;
 import com.github.cliftonlabs.json_simple.Jsoner;
 import java.io.IOException;
+import java.io.StringWriter;
 
 /**
  *
@@ -23,18 +25,26 @@ public abstract class BaseStep implements JsonData {
     protected int index;
     protected BasicConsoleLogger logger;
     protected EngineType engine;
-//    protected List<BaseStep> subSteps; //TODO?
+    protected JsonObject jsonOut;
 
+//    protected List<BaseStep> subSteps; //TODO?
     protected BaseStep() {
-        this.type = StepType.BASE;
-        this.engine = EngineType.OPENCV;
-        this.index = 0;
-        this.logger = BasicConsoleLogger.get();
+        this(null);
     }
 
-    protected BaseStep(JsonObject json) throws IOException {
-        type = StepType.valueOf(json.getString(Keys.TYPE));
-        index = json.getInteger(Keys.INDEX);
+    protected BaseStep(JsonObject jsonIn) {
+        this.type = StepType.BASE;
+        this.index = 0;
+        this.engine = EngineType.OPENCV;
+        this.logger = BasicConsoleLogger.get();
+        this.jsonOut = new JsonObject();
+        if (jsonIn != null) {
+            this.type = StepType.valueOf(jsonIn.getString(Keys.TYPE));
+            this.index = jsonIn.getInteger(Keys.INDEX);
+        }
+        jsonOut.put(Keys.TYPE, type.name());
+        jsonOut.put(Keys.ENGINE, engine.name());
+        jsonOut.put(Keys.INDEX, index);
     }
 
     public void execute() throws OpusCVException {
@@ -59,10 +69,15 @@ public abstract class BaseStep implements JsonData {
     public abstract void finalize() throws OpusCVException;
 
     @Override
-    public void toJson(JsonObject json) {
-        json.put(Keys.TYPE, type.name());
-        json.put(Keys.ENGINE, engine.name());
-        json.put(Keys.INDEX, index);
+    public String toJson() throws OpusCVException {
+        final StringWriter writer = new StringWriter();
+        try {
+            jsonOut.toJson(writer);
+        } catch (final IOException ex) {
+            logger.error(ex.getMessage(), ex);
+            throw new OpusCVException(ErrorCode.JSON_WRITE);
+        }
+        return writer.toString();
     }
 
     @Override
