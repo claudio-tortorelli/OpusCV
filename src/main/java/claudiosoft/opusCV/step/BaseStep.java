@@ -14,7 +14,7 @@ import java.io.IOException;
  *
  * @author Claudio
  */
-public abstract class BaseStep implements Step, JsonData {
+public abstract class BaseStep implements JsonData {
 
     private long startTime;
     private long estimatedTime;
@@ -37,27 +37,26 @@ public abstract class BaseStep implements Step, JsonData {
         index = json.getInteger(Keys.INDEX);
     }
 
-    @Override
-    public void checkPrerequisites() throws OpusCVException {
-
-    }
-
-    @Override
-    public void prepare() throws OpusCVException {
+    public void execute() throws OpusCVException {
         logger.info("start " + getClass().getSimpleName());
         startTime = System.currentTimeMillis();
-    }
 
-    @Override
-    public void doProcess() throws OpusCVException {
+        checkPrerequisites();
+        prepare();
+        doProcess();
+        finalize();
 
-    }
-
-    @Override
-    public void finalize() throws OpusCVException {
         estimatedTime = System.currentTimeMillis() - startTime;
         logger.debug(getClass().getSimpleName() + " done in " + estimatedTime / 1000 + " sec");
     }
+
+    public abstract void checkPrerequisites() throws OpusCVException;
+
+    public abstract void prepare() throws OpusCVException;
+
+    public abstract void doProcess() throws OpusCVException;
+
+    public abstract void finalize() throws OpusCVException;
 
     @Override
     public void toJson(JsonObject json) {

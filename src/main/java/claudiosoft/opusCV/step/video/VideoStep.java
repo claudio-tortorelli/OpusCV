@@ -18,15 +18,25 @@ public class VideoStep extends BaseStep {
     }
 
     @Override
-    public void doProcess() throws OpusCVException {
-
-    }
-
-    @Override
     public void checkPrerequisites() throws OpusCVException {
         if (video == null || !video.exists()) {
             throw new OpusCVException("video file not found");
         }
+    }
+
+    @Override
+    public void prepare() throws OpusCVException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void doProcess() throws OpusCVException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void finalize() throws OpusCVException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

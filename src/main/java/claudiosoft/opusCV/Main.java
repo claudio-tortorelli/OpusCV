@@ -6,7 +6,7 @@ import claudiosoft.opusCV.process.Processor;
 import java.io.IOException;
 
 /**
- * TODO: review, eliminare l'interfaccia step in favore di metodi astratti?
+ * TODO:
  *
  * @author Claudio
  */

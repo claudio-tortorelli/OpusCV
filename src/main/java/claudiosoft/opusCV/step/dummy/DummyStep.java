@@ -79,12 +79,22 @@ public class DummyStep extends BaseStep {
 
     @Override
     public void checkPrerequisites() throws OpusCVException {
-        // fake process
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void prepare() throws OpusCVException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void doProcess() throws OpusCVException {
-        // fake process
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void finalize() throws OpusCVException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

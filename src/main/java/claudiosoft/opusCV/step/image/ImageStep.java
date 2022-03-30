@@ -24,7 +24,6 @@ public abstract class ImageStep extends BaseStep {
 
     @Override
     public void checkPrerequisites() throws OpusCVException {
-        super.checkPrerequisites();
         if (image == null) {
             throw new OpusCVException(ErrorCode.IMG_INVALID_IMAGE);
         }
@@ -32,17 +31,16 @@ public abstract class ImageStep extends BaseStep {
 
     @Override
     public void prepare() throws OpusCVException {
-        super.prepare();
+
     }
 
     @Override
     public void doProcess() throws OpusCVException {
-        super.doProcess();
+
     }
 
     @Override
     public void finalize() throws OpusCVException {
-        super.finalize();
         image.release();
     }
 

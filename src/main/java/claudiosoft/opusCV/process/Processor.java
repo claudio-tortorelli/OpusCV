@@ -12,8 +12,8 @@ import java.util.List;
  */
 public class Processor {
 
-    private List<BaseStep> steps;
-    private BasicConsoleLogger logger;
+    private final List<BaseStep> steps;
+    private final BasicConsoleLogger logger;
 
     public Processor() {
         this.steps = new LinkedList<>();
@@ -29,10 +29,7 @@ public class Processor {
         logger.info("start main process");
         long startTime = System.currentTimeMillis();
         for (BaseStep step : steps) {
-            step.prepare();
-            step.checkPrerequisites();
-            step.doProcess();
-            step.finalize();
+            step.execute();
         }
         long estimatedTime = System.currentTimeMillis() - startTime;
         logger.info("main process end in " + estimatedTime / 1000 + " sec");
