@@ -2,7 +2,7 @@ package claudiosoft.opusCV.step.video;
 
 import claudiosoft.opusCV.common.ErrorCode;
 import claudiosoft.opusCV.common.OpusCVException;
-import java.io.File;
+import com.github.cliftonlabs.json_simple.JsonObject;
 import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
 import static org.opencv.videoio.Videoio.CAP_PROP_FRAME_COUNT;
@@ -18,11 +18,14 @@ public class VideoGrabberStep extends VideoStep {
     protected int endFrame;
     protected int stepFrame;
 
-    public VideoGrabberStep(File video) {
-        super(video);
-        startFrame = 0;
-        endFrame = Integer.MAX_VALUE;
-        stepFrame = 1;
+//    public VideoGrabberStep(File video) {
+//        super(video);
+//        startFrame = 0;
+//        endFrame = Integer.MAX_VALUE;
+//        stepFrame = 1;
+//    }
+    public VideoGrabberStep(JsonObject jsonIn) {
+        super(jsonIn);
     }
 
     @Override

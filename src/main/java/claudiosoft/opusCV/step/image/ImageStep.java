@@ -3,6 +3,7 @@ package claudiosoft.opusCV.step.image;
 import claudiosoft.opusCV.common.ErrorCode;
 import claudiosoft.opusCV.common.OpusCVException;
 import claudiosoft.opusCV.step.BaseStep;
+import com.github.cliftonlabs.json_simple.JsonObject;
 import org.opencv.core.Mat;
 
 /**
@@ -13,12 +14,15 @@ public abstract class ImageStep extends BaseStep {
 
     protected Mat image;
 
-    public ImageStep(String imageFilePath) {
-        //TODO create mat from path
-    }
-
-    public ImageStep(Mat image) {
-        this.image = image;
+//    public ImageStep(String imageFilePath) {
+//        //TODO create mat from path
+//    }
+//
+//    public ImageStep(Mat image) {
+//        this.image = image;
+//    }
+    public ImageStep(JsonObject jsonIn) {
+        super(jsonIn);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package claudiosoft.opusCV.step.image;
 
 import claudiosoft.opusCV.common.OpusCVException;
-import org.opencv.core.Mat;
+import com.github.cliftonlabs.json_simple.JsonObject;
 
 /**
  *
@@ -11,10 +11,18 @@ public class ThresholdImageStep extends ImageStep {
 
     private boolean adaptive;
 
-    public ThresholdImageStep(boolean adaptive, Mat image) {
-        super(image);
-        //force dims between 1 and MAX_PIX
-        this.adaptive = adaptive;
+//    public ThresholdImageStep(boolean adaptive, Mat image) {
+//        super(image);
+//        //force dims between 1 and MAX_PIX
+//        this.adaptive = adaptive;
+//    }
+    public ThresholdImageStep(JsonObject jsonIn) {
+        super(jsonIn);
+    }
+
+    @Override
+    public void checkPrerequisites() throws OpusCVException {
+        super.checkPrerequisites();
     }
 
     @Override
@@ -27,11 +35,6 @@ public class ThresholdImageStep extends ImageStep {
         super.doProcess();
 
         logger.debug("");
-    }
-
-    @Override
-    public void checkPrerequisites() throws OpusCVException {
-        super.checkPrerequisites();
     }
 
     @Override

@@ -1,8 +1,8 @@
 package claudiosoft.opusCV.step.image;
 
 import claudiosoft.opusCV.common.OpusCVException;
+import com.github.cliftonlabs.json_simple.JsonObject;
 import org.opencv.core.Core;
-import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.highgui.HighGui;
@@ -24,19 +24,27 @@ public class ShowImageStep extends ImageStep {
         AUTOSIZE
     }
 
-    public ShowImageStep(String windowName, Mat image) {
-        this(windowName, WinType.NORMAL, 24, image);
+//    public ShowImageStep(String windowName, Mat image) {
+//        this(windowName, WinType.NORMAL, 24, image);
+//    }
+//
+//    public ShowImageStep(String windowName, WinType winType, Mat image) {
+//        this(windowName, winType, 24, image);
+//    }
+//
+//    public ShowImageStep(String windowName, WinType winType, int frameRate, Mat image) {
+//        super(image);
+//        this.windowName = windowName;
+//        this.winType = winType;
+//        this.frameRate = Integer.max(0, frameRate);
+//    }
+    public ShowImageStep(JsonObject jsonIn) {
+        super(jsonIn);
     }
 
-    public ShowImageStep(String windowName, WinType winType, Mat image) {
-        this(windowName, winType, 24, image);
-    }
-
-    public ShowImageStep(String windowName, WinType winType, int frameRate, Mat image) {
-        super(image);
-        this.windowName = windowName;
-        this.winType = winType;
-        this.frameRate = Integer.max(0, frameRate);
+    @Override
+    public void checkPrerequisites() throws OpusCVException {
+        super.checkPrerequisites();
     }
 
     @Override
@@ -55,11 +63,6 @@ public class ShowImageStep extends ImageStep {
         }
         HighGui.waitKey(this.frameRate);
         logger.debug("image updated to '" + this.windowName + "' window");
-    }
-
-    @Override
-    public void checkPrerequisites() throws OpusCVException {
-        super.checkPrerequisites();
     }
 
     @Override

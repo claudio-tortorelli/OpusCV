@@ -2,6 +2,7 @@ package claudiosoft.opusCV.step.video;
 
 import claudiosoft.opusCV.common.ErrorCode;
 import claudiosoft.opusCV.common.OpusCVException;
+import com.github.cliftonlabs.json_simple.JsonObject;
 import java.io.File;
 import java.util.LinkedList;
 import org.opencv.core.Mat;
@@ -17,10 +18,21 @@ public class Video2PicStep extends VideoGrabberStep {
     private int bufferSize;
     private File outFolder;
 
-    public Video2PicStep(File video, File outFolder) {
-        super(video);
-        this.bufferSize = 2;
-        this.outFolder = outFolder;
+//    public Video2PicStep(File video, File outFolder) {
+//        super(video);
+//        this.bufferSize = 2;
+//        this.outFolder = outFolder;
+//    }
+    public Video2PicStep(JsonObject jsonIn) {
+        super(jsonIn);
+    }
+
+    @Override
+    public void checkPrerequisites() throws OpusCVException {
+        if (outFolder == null) {
+            throw new OpusCVException("Invalid output folder");
+        }
+        super.checkPrerequisites();
     }
 
     @Override
@@ -131,14 +143,6 @@ public class Video2PicStep extends VideoGrabberStep {
             cap.release();
             logger.info(processedFrames + " frames processed");
         }
-    }
-
-    @Override
-    public void checkPrerequisites() throws OpusCVException {
-        if (outFolder == null) {
-            throw new OpusCVException("Invalid output folder");
-        }
-        super.checkPrerequisites();
     }
 
     public int getBufferSize() {

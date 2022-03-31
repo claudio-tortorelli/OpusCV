@@ -21,7 +21,7 @@ public class DummyStep extends BaseStep {
     protected List<Integer> listInt;
 
     public DummyStep() throws IOException {
-        this(null);
+        this(null); // preset values
     }
 
     public DummyStep(JsonObject jsonIn) throws IOException {

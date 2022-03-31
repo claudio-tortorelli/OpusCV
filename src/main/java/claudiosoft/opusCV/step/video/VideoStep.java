@@ -2,6 +2,7 @@ package claudiosoft.opusCV.step.video;
 
 import claudiosoft.opusCV.common.OpusCVException;
 import claudiosoft.opusCV.step.BaseStep;
+import com.github.cliftonlabs.json_simple.JsonObject;
 import java.io.File;
 
 /**
@@ -12,8 +13,11 @@ public class VideoStep extends BaseStep {
 
     protected File video;
 
-    public VideoStep(File video) {
-        this.video = video;
+//    public VideoStep(File video) {
+//        this.video = video;
+//    }
+    public VideoStep(JsonObject jsonIn) {
+        super(jsonIn);
     }
 
     @Override

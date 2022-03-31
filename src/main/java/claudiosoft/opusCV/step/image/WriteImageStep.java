@@ -2,8 +2,8 @@ package claudiosoft.opusCV.step.image;
 
 import claudiosoft.opusCV.common.ErrorCode;
 import claudiosoft.opusCV.common.OpusCVException;
+import com.github.cliftonlabs.json_simple.JsonObject;
 import java.io.File;
-import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
 
 /**
@@ -15,10 +15,21 @@ public class WriteImageStep extends ImageStep {
     protected File outFile;
     protected boolean overwrite;
 
-    public WriteImageStep(File outFile, Mat image) {
-        super(image);
-        this.outFile = outFile;
-        this.overwrite = true;
+//    public WriteImageStep(File outFile, Mat image) {
+//        super(image);
+//        this.outFile = outFile;
+//        this.overwrite = true;
+//    }
+    public WriteImageStep(JsonObject jsonIn) {
+        super(jsonIn);
+    }
+
+    @Override
+    public void checkPrerequisites() throws OpusCVException {
+        super.checkPrerequisites();
+        if (outFile == null) {
+            throw new OpusCVException(ErrorCode.IMG_OUTPUT_NOT_DEFINED);
+        }
     }
 
     @Override
@@ -31,14 +42,6 @@ public class WriteImageStep extends ImageStep {
         outFile.delete();
         Imgcodecs.imwrite(outFile.getAbsolutePath(), image);
         logger.debug("image saved to " + outFile.getAbsolutePath());
-    }
-
-    @Override
-    public void checkPrerequisites() throws OpusCVException {
-        super.checkPrerequisites();
-        if (outFile == null) {
-            throw new OpusCVException(ErrorCode.IMG_OUTPUT_NOT_DEFINED);
-        }
     }
 
     public File getOutFile() {

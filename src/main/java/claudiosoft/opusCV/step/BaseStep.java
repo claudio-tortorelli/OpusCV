@@ -26,11 +26,7 @@ public abstract class BaseStep implements JsonData {
     protected BasicConsoleLogger logger;
     protected EngineType engine;
     protected JsonObject jsonOut;
-
 //    protected List<BaseStep> subSteps; //TODO?
-    protected BaseStep() {
-        this(null);
-    }
 
     protected BaseStep(JsonObject jsonIn) {
         this.type = StepType.BASE;

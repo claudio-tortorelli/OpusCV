@@ -1,7 +1,7 @@
 package claudiosoft.opusCV.step.image;
 
 import claudiosoft.opusCV.common.OpusCVException;
-import java.io.IOException;
+import com.github.cliftonlabs.json_simple.JsonObject;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
@@ -12,8 +12,16 @@ import org.opencv.imgproc.Imgproc;
  */
 public class CvtToGrayImageStep extends ImageStep {
 
-    public CvtToGrayImageStep(Mat image) throws IOException {
-        super(image);
+//    public CvtToGrayImageStep(Mat image) {
+//        super(image);
+//    }
+    public CvtToGrayImageStep(JsonObject jsonIn) {
+        super(jsonIn);
+    }
+
+    @Override
+    public void checkPrerequisites() throws OpusCVException {
+        super.checkPrerequisites();
     }
 
     @Override
@@ -28,11 +36,6 @@ public class CvtToGrayImageStep extends ImageStep {
         Imgproc.cvtColor(image, cvtImg, Imgproc.COLOR_BGR2GRAY);
         image = cvtImg;
         logger.debug("image color converted to gray");
-    }
-
-    @Override
-    public void checkPrerequisites() throws OpusCVException {
-        super.checkPrerequisites();
     }
 
     @Override
