@@ -1,34 +1,39 @@
 package claudiosoft.opusCV.process;
 
+import claudiosoft.opusCV.logger.BasicConsoleLogger;
+import claudiosoft.opusCV.step.BaseStep;
 import com.github.cliftonlabs.json_simple.JsonObject;
-import com.github.cliftonlabs.json_simple.Jsonable;
-import java.io.IOException;
-import java.io.StringWriter;
-import java.io.Writer;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
  * @author Claudio
  */
-public class Process implements Jsonable {
+public class Process {
 
     private Configuration conf;
+    private final List<BaseStep> steps;
+    private final BasicConsoleLogger logger;
 
-    @Override
-    public String toJson() {
-        final StringWriter writable = new StringWriter();
-        try {
-            this.toJson(writable);
-        } catch (final IOException e) {
-        }
-        return writable.toString();
+    public Process(JsonObject jsonIn) {
+        this.logger = BasicConsoleLogger.get();
+        this.conf = new Configuration(jsonIn);
+        //TODO parse steps
+        this.steps = new LinkedList<>();
     }
 
-    @Override
-    public void toJson(Writer writer) throws IOException {
-        final JsonObject json = new JsonObject();
-        this.conf.toJson(writer);
-        json.toJson(writer);
+    public void addStep(BaseStep step) {
+        steps.add(step);
+        logger.info(step.getClass().getSimpleName() + " added to process");
+    }
+
+    public final List<BaseStep> getSteps() {
+        return steps;
+    }
+
+    public final Configuration getConf() {
+        return conf;
     }
 
 }

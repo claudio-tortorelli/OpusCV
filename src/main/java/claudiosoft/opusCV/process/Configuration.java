@@ -1,43 +1,29 @@
 package claudiosoft.opusCV.process;
 
 import claudiosoft.opusCV.common.EngineType;
+import claudiosoft.opusCV.common.JsonData;
 import claudiosoft.opusCV.common.Keys;
 import com.github.cliftonlabs.json_simple.JsonObject;
-import com.github.cliftonlabs.json_simple.Jsonable;
-import java.io.IOException;
-import java.io.StringWriter;
-import java.io.Writer;
 
 /**
  *
  * @author Claudio
  */
-public class Configuration implements Jsonable {
+public class Configuration extends JsonData {
 
-    private EngineType engine;
+    private EngineType defaultEngine;
     private String processFolder;
 
-    @Override
-    public String toJson() {
-        final StringWriter writable = new StringWriter();
-        try {
-            this.toJson(writable);
-        } catch (final IOException e) {
+    public Configuration(JsonObject jsonIn) {
+        super();
+        this.defaultEngine = EngineType.OPENCV;
+        this.processFolder = "";
+        if (jsonIn != null) {
+            this.defaultEngine = EngineType.valueOf(jsonIn.getString(Keys.ENGINE));
+            this.processFolder = jsonIn.getString(Keys.PROCESS_FOLDER);
         }
-        return writable.toString();
-    }
-
-    @Override
-    public void toJson(Writer writer) throws IOException {
-        final JsonObject json = new JsonObject();
-        toJson(json);
-        json.toJson(writer);
-
-    }
-
-    protected void toJson(JsonObject json) throws IOException {
-        json.put(Keys.ENGINE, engine.name());
-        json.put(Keys.PROCESS_FOLDER, processFolder);
+        jsonOut.put(Keys.ENGINE, defaultEngine.name());
+        jsonOut.put(Keys.PROCESS_FOLDER, processFolder);
     }
 
 }
