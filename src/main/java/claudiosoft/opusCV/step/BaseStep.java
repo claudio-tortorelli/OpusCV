@@ -2,7 +2,6 @@ package claudiosoft.opusCV.step;
 
 import claudiosoft.opusCV.common.EngineType;
 import claudiosoft.opusCV.common.JsonData;
-import claudiosoft.opusCV.common.Keys;
 import claudiosoft.opusCV.common.OpusCVException;
 import claudiosoft.opusCV.logger.BasicConsoleLogger;
 import com.github.cliftonlabs.json_simple.JsonObject;
@@ -16,25 +15,20 @@ public abstract class BaseStep extends JsonData {
     private long startTime;
     private long estimatedTime;
 
+    protected BasicConsoleLogger logger;
+
     protected StepType type;
     protected int index;
-    protected BasicConsoleLogger logger;
     protected EngineType engine;
-//    protected List<BaseStep> subSteps; //TODO?
+    protected String name;
 
     protected BaseStep(JsonObject jsonIn) {
-        super();
-        this.type = StepType.BASE;
-        this.index = 0;
-        this.engine = EngineType.OPENCV;
+        super(jsonIn);
         this.logger = BasicConsoleLogger.get();
-        if (jsonIn != null) {
-            this.type = StepType.valueOf(jsonIn.getString(Keys.TYPE));
-            this.index = jsonIn.getInteger(Keys.INDEX);
-        }
-        jsonOut.put(Keys.TYPE, type.name());
-        jsonOut.put(Keys.ENGINE, engine.name());
-        jsonOut.put(Keys.INDEX, index);
+        this.type = (StepType) StepKey.getValueFromJson(json, StepKey.TYPE);
+        this.index = (int) StepKey.getValueFromJson(json, StepKey.INDEX);
+        this.engine = (EngineType) StepKey.getValueFromJson(json, StepKey.ENGINE);
+        this.name = (String) StepKey.getValueFromJson(json, StepKey.NAME);
     }
 
     public void execute() throws OpusCVException {
@@ -70,4 +64,7 @@ public abstract class BaseStep extends JsonData {
         return engine;
     }
 
+    public String getName() {
+        return name;
+    }
 }

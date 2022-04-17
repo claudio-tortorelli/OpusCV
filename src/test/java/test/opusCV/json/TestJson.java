@@ -3,9 +3,11 @@
  */
 package test.opusCV.json;
 
-import claudiosoft.opusCV.common.Keys;
+import claudiosoft.opusCV.common.EngineType;
+import claudiosoft.opusCV.common.JsonData;
 import claudiosoft.opusCV.common.OpusCVException;
 import claudiosoft.opusCV.step.StepFactory;
+import claudiosoft.opusCV.step.StepKey;
 import claudiosoft.opusCV.step.StepType;
 import claudiosoft.opusCV.step.dummy.DummyStep;
 import com.github.cliftonlabs.json_simple.JsonException;
@@ -46,11 +48,11 @@ public class TestJson extends BaseJUnitTest {
 
         // this should be inside any json object data
         JsonObject objOut = new JsonObject();
-        objOut.put(Keys.TEST_COUNT, 1);
-        objOut.put(Keys.TEST_NAME, "testObj");
+        objOut.put(StepKey.DUMMY_COUNT, 1);
+        objOut.put(StepKey.NAME, "testObj");
         List<Integer> list = new ArrayList<>();
         list.add(10);
-        objOut.put(Keys.TEST_LIST_INT, list);
+        objOut.put(StepKey.DUMMY_LIST_INT, list);
 
         // object to json
         String toJson = Jsoner.prettyPrint(objOut.toJson());
@@ -63,15 +65,24 @@ public class TestJson extends BaseJUnitTest {
 
     @Test
     public void tSerializeDeserizalizeJsonData() throws OpusCVException, JsonException, IOException {
-        DummyStep toBeSerialized = new DummyStep();
-        String json = toBeSerialized.toJson();
+        JsonObject jsonIn = new JsonObject();
+        jsonIn.put(StepKey.TYPE, StepType.DUMMY);
+        jsonIn.put(StepKey.INDEX, 0);
+        jsonIn.put(StepKey.ENGINE, EngineType.OPENCV);
+        jsonIn.put(StepKey.NAME, "Dummy");
+        jsonIn.put(StepKey.DUMMY_COUNT, 0);
+        jsonIn.put(StepKey.DUMMY_LIST_INT, new ArrayList());
+        jsonIn.put(StepKey.DUMMY_PRECISION, 0.0);
+
+        DummyStep toBeSerialized = (DummyStep) StepFactory.get(jsonIn);
+        String json = JsonData.toString(toBeSerialized.getJson());
         System.out.println(Jsoner.prettyPrint(json));
 
         DummyStep toBeDeserialized = new DummyStep();
-        JsonObject testBean = (JsonObject) toBeDeserialized.fromJson(json);
+        JsonObject testBean = (JsonObject) toBeDeserialized.fromString(json);
         DummyStep deserialized = (DummyStep) StepFactory.get(testBean);
         Assert.assertTrue(deserialized != null);
-        Assert.assertTrue(deserialized.getType() == StepType.TEST);
+        Assert.assertTrue(deserialized.getType() == StepType.DUMMY);
     }
 
     @Test

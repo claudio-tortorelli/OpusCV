@@ -12,23 +12,31 @@ import java.io.StringWriter;
  */
 public abstract class JsonData {
 
-    protected JsonObject jsonOut;
+    protected JsonObject json;
 
-    public JsonData() {
-        this.jsonOut = new JsonObject();
+    public JsonData(JsonObject jsonIn) {
+        if (jsonIn == null) {
+            jsonIn = new JsonObject();
+        }
+        this.json = jsonIn;
+
     }
 
-    public String toJson() throws OpusCVException {
+    public JsonObject getJson() {
+        return json;
+    }
+
+    public static String toString(JsonObject json) throws OpusCVException {
         final StringWriter writer = new StringWriter();
         try {
-            jsonOut.toJson(writer);
+            json.toJson(writer);
         } catch (final IOException ex) {
             throw new OpusCVException(ErrorCode.JSON_WRITE);
         }
         return writer.toString();
     }
 
-    public JsonObject fromJson(String json) throws JsonException {
+    public static JsonObject fromString(String json) throws JsonException {
         return (JsonObject) Jsoner.deserialize(json);
     }
 

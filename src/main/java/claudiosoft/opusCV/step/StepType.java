@@ -6,6 +6,6 @@ package claudiosoft.opusCV.step;
  */
 public enum StepType {
     BASE,
-    TEST,
+    DUMMY,
     IMG,
 }
