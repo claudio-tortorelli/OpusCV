@@ -5,7 +5,6 @@ package test.opusCV.core;
 
 import claudiosoft.opusCV.logger.BasicConsoleLogger;
 import claudiosoft.opusCV.step.core.OpenCVNative;
-import com.github.cliftonlabs.json_simple.JsonException;
 import java.io.IOException;
 import org.junit.Assert;
 import org.junit.Assume;
@@ -31,7 +30,7 @@ public class TestOpenCV extends BaseJUnitTest {
     }
 
     @Test
-    public void tCheckOpenCVAvailable() throws IOException, InterruptedException, JsonException {
+    public void tCheckOpenCVAvailable() throws IOException, InterruptedException {
         Assume.assumeTrue("opencv loaded", OpenCVNative.isLoaded());
         Mat mat = Mat.eye(3, 3, CvType.CV_8UC1);
         Assert.assertTrue(mat != null);

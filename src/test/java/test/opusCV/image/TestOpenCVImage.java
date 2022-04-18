@@ -9,7 +9,6 @@ import claudiosoft.opusCV.common.Utils;
 import claudiosoft.opusCV.image.ImageProvider;
 import claudiosoft.opusCV.image.OpenCVImage;
 import claudiosoft.opusCV.step.core.OpenCVNative;
-import com.github.cliftonlabs.json_simple.JsonException;
 import java.io.File;
 import java.io.IOException;
 import org.junit.Assert;
@@ -34,7 +33,7 @@ public class TestOpenCVImage extends BaseJUnitTest {
     }
 
     @Test
-    public void tLoadImage() throws IOException, InterruptedException, JsonException, OpusCVException {
+    public void tLoadImage() throws IOException, InterruptedException, OpusCVException {
         File sampleImage = Utils.getFileFromRes("sampleImage/image-test.jpg");
         Assume.assumeTrue("sample image present", sampleImage != null);
         Assume.assumeTrue("opencv loaded", OpenCVNative.isLoaded());

@@ -3,19 +3,12 @@
  */
 package test.opusCV.json;
 
-import claudiosoft.opusCV.common.EngineType;
-import claudiosoft.opusCV.common.JsonData;
+import claudiosoft.opusCV.common.JsonUtils;
 import claudiosoft.opusCV.common.OpusCVException;
-import claudiosoft.opusCV.step.StepFactory;
-import claudiosoft.opusCV.step.StepKey;
-import claudiosoft.opusCV.step.StepType;
+import claudiosoft.opusCV.step.dummy.Book;
 import claudiosoft.opusCV.step.dummy.DummyStep;
-import com.github.cliftonlabs.json_simple.JsonException;
-import com.github.cliftonlabs.json_simple.JsonObject;
-import com.github.cliftonlabs.json_simple.Jsoner;
+import com.google.gson.GsonBuilder;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -42,47 +35,64 @@ public class TestJson extends BaseJUnitTest {
     }
 
     @Test
-    public void tJsonObjectOutputInput() throws JsonException {
-
-        System.out.println("write object to json");
-
-        // this should be inside any json object data
-        JsonObject objOut = new JsonObject();
-        objOut.put(StepKey.DUMMY_COUNT, 1);
-        objOut.put(StepKey.NAME, "testObj");
-        List<Integer> list = new ArrayList<>();
-        list.add(10);
-        objOut.put(StepKey.DUMMY_LIST_INT, list);
-
-        // object to json
-        String toJson = Jsoner.prettyPrint(objOut.toJson());
-        System.out.println(toJson);
-
-        // this is from json
-        JsonObject objIn = (JsonObject) Jsoner.deserialize(toJson);
-        System.out.println("json readed to object");
+    public void tToGson() throws OpusCVException, IOException {
+        Book book = new Book("Thinking in Java", "978-0131872486", 1998, new String[]{"Bruce Eckel"});
+        // convert book object to JSON
+        String json = new GsonBuilder().setPrettyPrinting().create().toJson(book);
+        Assert.assertTrue(json != null);
+        System.out.println(json);
     }
 
     @Test
-    public void tSerializeDeserizalizeJsonData() throws OpusCVException, JsonException, IOException {
-        JsonObject jsonIn = new JsonObject();
-        jsonIn.put(StepKey.TYPE, StepType.DUMMY);
-        jsonIn.put(StepKey.INDEX, 0);
-        jsonIn.put(StepKey.ENGINE, EngineType.OPENCV);
-        jsonIn.put(StepKey.NAME, "Dummy");
-        jsonIn.put(StepKey.DUMMY_COUNT, 0);
-        jsonIn.put(StepKey.DUMMY_LIST_INT, new ArrayList());
-        jsonIn.put(StepKey.DUMMY_PRECISION, 0.0);
+    public void tToJsonUtils() throws OpusCVException, IOException {
+        Book book = new Book("Thinking in Java", "978-0131872486", 1998, new String[]{"Bruce Eckel"});
+        // convert book object to JSON
+        String json = JsonUtils.toJson(book);
+        Assert.assertTrue(json != null);
+        System.out.println(json);
+    }
 
-        DummyStep toBeSerialized = (DummyStep) StepFactory.get(jsonIn);
-        String json = JsonData.toString(toBeSerialized.getJson());
-        System.out.println(Jsoner.prettyPrint(json));
+    @Test
+    public void tToJsonUtils2() throws OpusCVException, IOException {
+        DummyStep dummy = new DummyStep();
+        String json = JsonUtils.toJson(dummy);
+        Assert.assertTrue(json != null);
+        System.out.println(json);
+    }
 
-        DummyStep toBeDeserialized = new DummyStep();
-        JsonObject testBean = (JsonObject) toBeDeserialized.fromString(json);
-        DummyStep deserialized = (DummyStep) StepFactory.get(testBean);
-        Assert.assertTrue(deserialized != null);
-        Assert.assertTrue(deserialized.getType() == StepType.DUMMY);
+    @Test
+    public void tFromJsonUtils() throws OpusCVException, IOException {
+
+        String json = "{\n"
+                + "  \"objType\": \"Book\",\n"
+                + "  \"title\": \"Thinking in Java\",\n"
+                + "  \"isbn\": \"978-0131872486\",\n"
+                + "  \"year\": 1998,\n"
+                + "  \"authors\": [\n"
+                + "    \"Bruce Eckel\"\n"
+                + "  ]\n"
+                + "}";
+
+        Book book = (Book) JsonUtils.fromJson(json);
+        Assert.assertTrue(book != null);
+    }
+
+    @Test
+    public void tFromJsonUtils2() throws OpusCVException, IOException {
+
+        String json = "{\n"
+                + "  \"objType\": \"DummyStep\",\n"
+                + "  \"counter\": 0,\n"
+                + "  \"precision\": 0.0,\n"
+                + "  \"listInt\": [],\n"
+                + "  \"type\": \"BASE\",\n"
+                + "  \"index\": 0,\n"
+                + "  \"engine\": \"OPENCV\",\n"
+                + "  \"name\": \"\"\n"
+                + "}";
+
+        DummyStep dummy = (DummyStep) JsonUtils.fromJson(json);
+        Assert.assertTrue(dummy != null);
     }
 
     @Test

@@ -1,11 +1,8 @@
 package claudiosoft.opusCV.step;
 
 import claudiosoft.opusCV.common.EngineType;
-import com.github.cliftonlabs.json_simple.JsonKey;
-import com.github.cliftonlabs.json_simple.JsonObject;
-import com.github.cliftonlabs.json_simple.Jsoner;
+import claudiosoft.opusCV.common.JsonData;
 import java.util.ArrayList;
-import java.util.Map.Entry;
 
 /**
  *
@@ -14,23 +11,14 @@ import java.util.Map.Entry;
 public class StepKey {
 
     ///////// BASE
-    public static final JsonKey TYPE = Jsoner.mintJsonKey("type", StepType.BASE);
-    public static final JsonKey ENGINE = Jsoner.mintJsonKey("engine", EngineType.OPENCV);
-    public static final JsonKey INDEX = Jsoner.mintJsonKey("index", 0);
-    public static final JsonKey NAME = Jsoner.mintJsonKey("name", "");
+    public static final JsonData TYPE = new JsonData("type", StepType.BASE);
+    public static final JsonData ENGINE = new JsonData("engine", EngineType.OPENCV);
+    public static final JsonData INDEX = new JsonData("index", 0);
+    public static final JsonData NAME = new JsonData("name", "");
 
     /////////// DUMMY
-    public static final JsonKey DUMMY_COUNT = Jsoner.mintJsonKey("count", 0);
-    public static final JsonKey DUMMY_PRECISION = Jsoner.mintJsonKey("precision", 0.0);
-    public static final JsonKey DUMMY_LIST_INT = Jsoner.mintJsonKey("list_int", new ArrayList());
-
-    public static Object getValueFromJson(JsonObject json, JsonKey key) {
-        for (Entry<String, Object> entry : json.entrySet()) {
-            if (entry.getKey().equals(key.getKey())) {
-                return entry.getValue();
-            }
-        }
-        return key.getValue();
-    }
+    public static final JsonData DUMMY_COUNT = new JsonData("count", 0);
+    public static final JsonData DUMMY_PRECISION = new JsonData("precision", 0.0);
+    public static final JsonData DUMMY_LIST_INT = new JsonData("list_int", new ArrayList());
 
 }

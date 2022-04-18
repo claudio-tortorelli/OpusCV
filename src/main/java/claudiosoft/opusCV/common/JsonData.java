@@ -1,43 +1,47 @@
 package claudiosoft.opusCV.common;
 
-import com.github.cliftonlabs.json_simple.JsonException;
-import com.github.cliftonlabs.json_simple.JsonObject;
-import com.github.cliftonlabs.json_simple.Jsoner;
-import java.io.IOException;
-import java.io.StringWriter;
-
 /**
  *
  * @author Claudio
  */
-public abstract class JsonData {
+public class JsonData {
 
-    protected JsonObject json;
+    private String key;
+    private Object value;
+    private Object defaultValue;
 
-    public JsonData(JsonObject jsonIn) {
-        if (jsonIn == null) {
-            jsonIn = new JsonObject();
-        }
-        this.json = jsonIn;
-
+    public JsonData(String key, Object defaultValue) {
+        this(key, null, defaultValue);
     }
 
-    public JsonObject getJson() {
-        return json;
+    public JsonData(String key, Object value, Object defaultValue) {
+        this.key = key;
+        this.value = value;
+        this.defaultValue = defaultValue;
     }
 
-    public static String toString(JsonObject json) throws OpusCVException {
-        final StringWriter writer = new StringWriter();
-        try {
-            json.toJson(writer);
-        } catch (final IOException ex) {
-            throw new OpusCVException(ErrorCode.JSON_WRITE);
-        }
-        return writer.toString();
+    public String getKey() {
+        return key;
     }
 
-    public static JsonObject fromString(String json) throws JsonException {
-        return (JsonObject) Jsoner.deserialize(json);
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public Object getValue() {
+        return value;
+    }
+
+    public void setValue(Object value) {
+        this.value = value;
+    }
+
+    public Object getDefaultValue() {
+        return defaultValue;
+    }
+
+    public void setDefaultValue(Object defaultValue) {
+        this.defaultValue = defaultValue;
     }
 
 }

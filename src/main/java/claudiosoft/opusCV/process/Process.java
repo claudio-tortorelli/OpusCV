@@ -2,7 +2,6 @@ package claudiosoft.opusCV.process;
 
 import claudiosoft.opusCV.logger.BasicConsoleLogger;
 import claudiosoft.opusCV.step.BaseStep;
-import com.github.cliftonlabs.json_simple.JsonObject;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,9 +15,9 @@ public class Process {
     private final List<BaseStep> steps;
     private final BasicConsoleLogger logger;
 
-    public Process(JsonObject jsonIn) {
+    public Process(String jsonIn) {
         this.logger = BasicConsoleLogger.get();
-        this.conf = new Configuration(jsonIn);
+        this.conf = new Configuration();
         //TODO parse steps
         this.steps = new LinkedList<>();
     }

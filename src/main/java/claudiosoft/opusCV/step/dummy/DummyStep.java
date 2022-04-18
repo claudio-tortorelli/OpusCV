@@ -3,7 +3,6 @@ package claudiosoft.opusCV.step.dummy;
 import claudiosoft.opusCV.common.OpusCVException;
 import claudiosoft.opusCV.step.BaseStep;
 import claudiosoft.opusCV.step.StepKey;
-import com.github.cliftonlabs.json_simple.JsonObject;
 import java.io.IOException;
 import java.util.List;
 
@@ -18,14 +17,10 @@ public class DummyStep extends BaseStep {
     protected List<Integer> listInt;
 
     public DummyStep() throws IOException {
-        this(null); // preset values
-    }
-
-    public DummyStep(JsonObject jsonIn) throws IOException {
-        super(jsonIn);
-        this.counter = (int) StepKey.getValueFromJson(json, StepKey.DUMMY_COUNT);
-        this.precision = (double) StepKey.getValueFromJson(json, StepKey.DUMMY_PRECISION);
-        this.listInt = (List<Integer>) StepKey.getValueFromJson(json, StepKey.DUMMY_LIST_INT);
+        super();
+        this.counter = (int) StepKey.DUMMY_COUNT.getDefaultValue();
+        this.precision = (double) StepKey.DUMMY_PRECISION.getDefaultValue();
+        this.listInt = (List<Integer>) StepKey.DUMMY_LIST_INT.getDefaultValue();
     }
 
     public int getCount() {
