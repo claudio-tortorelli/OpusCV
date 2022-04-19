@@ -22,10 +22,10 @@ public abstract class BaseStep {
 
     protected BaseStep() {
         this.logger = BasicConsoleLogger.get();
-        this.type = (StepType) StepKey.TYPE.getDefaultValue();
-        this.index = (int) StepKey.INDEX.getDefaultValue();
-        this.engine = (EngineType) StepKey.ENGINE.getDefaultValue();
-        this.name = (String) StepKey.NAME.getDefaultValue();
+        this.type = StepType.BASE;
+        this.index = 0;
+        this.engine = EngineType.OPENCV;
+        this.name = "";
     }
 
     public void execute() throws OpusCVException {

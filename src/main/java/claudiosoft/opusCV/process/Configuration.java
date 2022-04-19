@@ -12,9 +12,8 @@ public class Configuration {
     private String processFolder;
 
     public Configuration() {
-        super();
-        this.defaultEngine = (EngineType) ConfKey.DEFAULT_ENGINE.getDefaultValue();
-        this.processFolder = (String) ConfKey.PROCESS_FOLDER.getDefaultValue();
+        this.defaultEngine = EngineType.OPENCV;
+        this.processFolder = "";
     }
 
     public EngineType getDefaultEngine() {

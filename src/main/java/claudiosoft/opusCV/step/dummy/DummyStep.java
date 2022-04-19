@@ -2,8 +2,8 @@ package claudiosoft.opusCV.step.dummy;
 
 import claudiosoft.opusCV.common.OpusCVException;
 import claudiosoft.opusCV.step.BaseStep;
-import claudiosoft.opusCV.step.StepKey;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,10 +17,9 @@ public class DummyStep extends BaseStep {
     protected List<Integer> listInt;
 
     public DummyStep() throws IOException {
-        super();
-        this.counter = (int) StepKey.DUMMY_COUNT.getDefaultValue();
-        this.precision = (double) StepKey.DUMMY_PRECISION.getDefaultValue();
-        this.listInt = (List<Integer>) StepKey.DUMMY_LIST_INT.getDefaultValue();
+        this.counter = 0;
+        this.precision = 0.0;
+        this.listInt = new ArrayList();
     }
 
     public int getCount() {

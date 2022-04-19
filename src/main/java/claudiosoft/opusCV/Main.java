@@ -8,8 +8,6 @@ import java.io.IOException;
  * TODO: creare un file recipt json con conf e steps da parsare creare step
  * container
  *
- * StepKey ConfKey StepFactory eliminare
- *
  * @author Claudio
  */
 public class Main {
