@@ -1,6 +1,6 @@
 package claudiosoft.opusCV.common;
 
-import claudiosoft.opusCV.step.dummy.Book;
+import claudiosoft.opusCV.step.dummy.DummyObject;
 import claudiosoft.opusCV.step.dummy.DummyStep;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -26,12 +26,11 @@ public class JsonUtils {
             gson = new GsonBuilder().setPrettyPrinting().create();
         }
         JsonObject jsonObject = gson.fromJson(json, JsonObject.class);
-        String objType = jsonObject.get("objType").getAsString();
-        switch (objType) {
-            case "Book":
-                return (Book) gson.fromJson(json, Book.class);
-            case "DummyStep":
-                return (DummyStep) gson.fromJson(json, DummyStep.class);
+        String objType = jsonObject.get(Constants.OBJ_TYPE).getAsString();
+        if (DummyObject.class.getName().endsWith(objType)) {
+            return (DummyObject) gson.fromJson(json, DummyObject.class);
+        } else if (DummyStep.class.getName().endsWith(objType)) {
+            return (DummyStep) gson.fromJson(json, DummyStep.class);
         }
         throw new OpusCVException(ErrorCode.JSON_READ);
     }

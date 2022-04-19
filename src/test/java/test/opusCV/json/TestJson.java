@@ -5,7 +5,7 @@ package test.opusCV.json;
 
 import claudiosoft.opusCV.common.JsonUtils;
 import claudiosoft.opusCV.common.OpusCVException;
-import claudiosoft.opusCV.step.dummy.Book;
+import claudiosoft.opusCV.step.dummy.DummyObject;
 import claudiosoft.opusCV.step.dummy.DummyStep;
 import com.google.gson.GsonBuilder;
 import java.io.IOException;
@@ -36,7 +36,7 @@ public class TestJson extends BaseJUnitTest {
 
     @Test
     public void tToGson() throws OpusCVException, IOException {
-        Book book = new Book("Thinking in Java", "978-0131872486", 1998, new String[]{"Bruce Eckel"});
+        DummyObject book = new DummyObject("Thinking in Java", "978-0131872486", 1998, new String[]{"Bruce Eckel"});
         // convert book object to JSON
         String json = new GsonBuilder().setPrettyPrinting().create().toJson(book);
         Assert.assertTrue(json != null);
@@ -45,7 +45,7 @@ public class TestJson extends BaseJUnitTest {
 
     @Test
     public void tToJsonUtils() throws OpusCVException, IOException {
-        Book book = new Book("Thinking in Java", "978-0131872486", 1998, new String[]{"Bruce Eckel"});
+        DummyObject book = new DummyObject("Thinking in Java", "978-0131872486", 1998, new String[]{"Bruce Eckel"});
         // convert book object to JSON
         String json = JsonUtils.toJson(book);
         Assert.assertTrue(json != null);
@@ -64,7 +64,7 @@ public class TestJson extends BaseJUnitTest {
     public void tFromJsonUtils() throws OpusCVException, IOException {
 
         String json = "{\n"
-                + "  \"objType\": \"Book\",\n"
+                + "  \"objType\": \"DummyObject\",\n"
                 + "  \"title\": \"Thinking in Java\",\n"
                 + "  \"isbn\": \"978-0131872486\",\n"
                 + "  \"year\": 1998,\n"
@@ -73,7 +73,7 @@ public class TestJson extends BaseJUnitTest {
                 + "  ]\n"
                 + "}";
 
-        Book book = (Book) JsonUtils.fromJson(json);
+        DummyObject book = (DummyObject) JsonUtils.fromJson(json);
         Assert.assertTrue(book != null);
     }
 

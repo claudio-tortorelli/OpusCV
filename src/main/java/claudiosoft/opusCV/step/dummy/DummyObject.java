@@ -1,25 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package claudiosoft.opusCV.step.dummy;
 
 /**
  *
  * @author Claudio
  */
-public class Book {
+public class DummyObject {
 
     private String title;
     private String isbn;
     private long year;
     private String[] authors;
 
-    public Book() {
+    public DummyObject() {
     }
 
-    public Book(String title, String isbn, long year, String[] authors) {
+    public DummyObject(String title, String isbn, long year, String[] authors) {
         this.title = title;
         this.isbn = isbn;
         this.year = year;
