@@ -1,6 +1,7 @@
 package claudiosoft.opusCV.step;
 
 import claudiosoft.opusCV.common.EngineType;
+import claudiosoft.opusCV.common.ObjectTypeName;
 import claudiosoft.opusCV.common.OpusCVException;
 import claudiosoft.opusCV.logger.BasicConsoleLogger;
 
@@ -15,17 +16,17 @@ public abstract class BaseStep {
 
     protected transient BasicConsoleLogger logger;
 
-    protected StepType type;
+    protected String objTypeName;
+    protected StepCategory category;
     protected int index;
     protected EngineType engine;
-    protected String name;
 
     protected BaseStep() {
         this.logger = BasicConsoleLogger.get();
-        this.type = StepType.BASE;
+        this.category = StepCategory.BASE;
+        this.objTypeName = ObjectTypeName.BASE_STEP.get();
         this.index = 0;
         this.engine = EngineType.OPENCV;
-        this.name = "";
     }
 
     public void execute() throws OpusCVException {
@@ -49,8 +50,8 @@ public abstract class BaseStep {
 
     public abstract void finalize() throws OpusCVException;
 
-    public StepType getType() {
-        return type;
+    public StepCategory getType() {
+        return category;
     }
 
     public int getIndex() {
@@ -61,8 +62,8 @@ public abstract class BaseStep {
         return engine;
     }
 
-    public String getName() {
-        return name;
+    public String getObjectTypeName() {
+        return objTypeName;
     }
 
 }

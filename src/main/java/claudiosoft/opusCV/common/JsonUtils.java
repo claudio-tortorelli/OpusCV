@@ -1,12 +1,11 @@
 package claudiosoft.opusCV.common;
 
-import claudiosoft.opusCV.common.Constants;
-import claudiosoft.opusCV.common.ErrorCode;
-import claudiosoft.opusCV.common.OpusCVException;
+import claudiosoft.opusCV.step.MacroStep;
 import claudiosoft.opusCV.step.dummy.DummyObject;
 import claudiosoft.opusCV.step.dummy.DummyStep;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 /**
@@ -29,11 +28,19 @@ public class JsonUtils {
             gson = new GsonBuilder().setPrettyPrinting().create();
         }
         JsonObject jsonObject = gson.fromJson(json, JsonObject.class);
-        String objType = jsonObject.get(Constants.OBJ_TYPE).getAsString();
-        if (DummyObject.class.getName().endsWith(objType)) {
+        JsonElement objType = jsonObject.get(ObjectTypeName.OBJ_NAME_ID);
+        if (objType == null) {
+            throw new OpusCVException(ErrorCode.JSON_READ);
+        }
+        String typeStr = objType.getAsString();
+        if (DummyObject.class.getSimpleName().equals(typeStr)) {
             return (DummyObject) gson.fromJson(json, DummyObject.class);
-        } else if (DummyStep.class.getName().endsWith(objType)) {
+        } else if (DummyStep.class.getSimpleName().equals(typeStr)) {
             return (DummyStep) gson.fromJson(json, DummyStep.class);
+        } else if (MacroStep.class.getSimpleName().equals(typeStr)) {
+            MacroStep macro = new MacroStep();
+            //TODO, devono essere creati e aggiunti in modo ricorsivo i subSteps
+            return (MacroStep) gson.fromJson(json, MacroStep.class);
         }
         throw new OpusCVException(ErrorCode.JSON_READ);
     }

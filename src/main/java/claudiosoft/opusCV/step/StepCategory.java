@@ -4,8 +4,9 @@ package claudiosoft.opusCV.step;
  *
  * @author Claudio
  */
-public enum StepType {
+public enum StepCategory {
     BASE,
     DUMMY,
     IMG,
+    MACRO
 }

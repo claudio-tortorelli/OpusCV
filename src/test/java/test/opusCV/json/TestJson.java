@@ -17,7 +17,6 @@ import org.junit.runners.MethodSorters;
 import test.opusCV.BaseJUnitTest;
 
 /**
- * https://cliftonlabs.github.io/json-simple/
  *
  * @author Claudio
  */
@@ -64,7 +63,7 @@ public class TestJson extends BaseJUnitTest {
     public void tFromJsonUtils() throws OpusCVException, IOException {
 
         String json = "{\n"
-                + "  \"objType\": \"DummyObject\",\n"
+                + "  \"objTypeName\": \"DummyObject\",\n"
                 + "  \"title\": \"Thinking in Java\",\n"
                 + "  \"isbn\": \"978-0131872486\",\n"
                 + "  \"year\": 1998,\n"
@@ -81,7 +80,7 @@ public class TestJson extends BaseJUnitTest {
     public void tFromJsonUtils2() throws OpusCVException, IOException {
 
         String json = "{\n"
-                + "  \"objType\": \"DummyStep\",\n"
+                + "  \"objTypeName\": \"DummyStep\",\n"
                 + "  \"counter\": 0,\n"
                 + "  \"precision\": 0.0,\n"
                 + "  \"listInt\": [],\n"

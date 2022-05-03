@@ -6,5 +6,6 @@ package claudiosoft.opusCV.common;
  */
 public enum EngineType {
     OPENCV,
-    OTHER
+    OTHER,
+    NONE
 }
