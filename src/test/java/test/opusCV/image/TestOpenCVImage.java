@@ -3,7 +3,7 @@
  */
 package test.opusCV.image;
 
-import claudiosoft.opusCV.common.EngineType;
+import claudiosoft.opusCV.common.Provider;
 import claudiosoft.opusCV.common.OpusCVException;
 import claudiosoft.opusCV.common.Utils;
 import claudiosoft.opusCV.image.ImageProvider;
@@ -38,7 +38,7 @@ public class TestOpenCVImage extends BaseJUnitTest {
         Assume.assumeTrue("sample image present", sampleImage != null);
         Assume.assumeTrue("opencv loaded", OpenCVNative.isLoaded());
 
-        OpenCVImage image = (OpenCVImage) ImageProvider.get(sampleImage.getAbsolutePath(), EngineType.OPENCV);
+        OpenCVImage image = (OpenCVImage) ImageProvider.get(sampleImage.getAbsolutePath(), Provider.OPENCV);
         Assert.assertTrue(image != null);
         Assert.assertTrue(image.getRaw().width() == 1024.0 && image.getRaw().height() == 640.0);
     }

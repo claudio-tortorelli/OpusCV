@@ -1,6 +1,6 @@
 package claudiosoft.opusCV.process;
 
-import claudiosoft.opusCV.common.EngineType;
+import claudiosoft.opusCV.common.Provider;
 
 /**
  *
@@ -8,20 +8,20 @@ import claudiosoft.opusCV.common.EngineType;
  */
 public class Configuration {
 
-    private EngineType defaultEngine;
+    private Provider defaultProvider;
     private String processFolder;
 
     public Configuration() {
-        this.defaultEngine = EngineType.OPENCV;
+        this.defaultProvider = Provider.OPENCV;
         this.processFolder = "";
     }
 
-    public EngineType getDefaultEngine() {
-        return defaultEngine;
+    public Provider getDefaultProvider() {
+        return defaultProvider;
     }
 
-    public void setDefaultEngine(EngineType defaultEngine) {
-        this.defaultEngine = defaultEngine;
+    public void setDefaultProvider(Provider defaultProvider) {
+        this.defaultProvider = defaultProvider;
     }
 
     public String getProcessFolder() {

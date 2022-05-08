@@ -1,6 +1,6 @@
 package claudiosoft.opusCV.image;
 
-import claudiosoft.opusCV.common.EngineType;
+import claudiosoft.opusCV.common.Provider;
 
 /**
  *
@@ -8,22 +8,23 @@ import claudiosoft.opusCV.common.EngineType;
  */
 public abstract class Image {
 
-    protected EngineType engine;
+    protected Provider provider;
+    protected String path;
     protected double[] size;
     protected int depth;
 
     public Image() {
-        this(EngineType.OPENCV);
+        this(Provider.OPENCV);
     }
 
-    public Image(EngineType engine) {
-        this.engine = engine;
+    public Image(Provider provider) {
+        this.provider = provider;
         this.size = new double[2];
         this.depth = 3;
     }
 
-    public EngineType getEngine() {
-        return engine;
+    public Provider getProvider() {
+        return provider;
     }
 
     public double[] getSize() {

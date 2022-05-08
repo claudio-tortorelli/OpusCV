@@ -28,6 +28,12 @@ public class TestSteps {
         }
     }
 
+    /**
+     * Complex recursive serializalization and deserialization of object step
+     *
+     * @throws OpusCVException
+     * @throws IOException
+     */
     @Test
     public void tMacroStep() throws OpusCVException, IOException {
         List<BaseStep> steps = new LinkedList<>();
@@ -35,10 +41,13 @@ public class TestSteps {
         steps.add(new DummyStep());
 
         MacroStep stepMacro = new MacroStep(steps);
-        String jsonMacro = JsonUtils.toJson(stepMacro);
+        String jsonMacro = JsonUtils.objToJson(stepMacro);
         System.out.println(jsonMacro);
 
-        MacroStep stepMacro2 = (MacroStep) JsonUtils.fromJson(jsonMacro);
-        Assert.assertTrue(stepMacro.equals(stepMacro2)); //TODO implementare l'equivalenza tra step
+        MacroStep stepMacro2 = (MacroStep) JsonUtils.objFromJson(jsonMacro);
+
+        String firstJson = JsonUtils.objToJson(stepMacro);
+        String secondJson = JsonUtils.objToJson(stepMacro2);
+        Assert.assertTrue(firstJson.equals(secondJson));
     }
 }

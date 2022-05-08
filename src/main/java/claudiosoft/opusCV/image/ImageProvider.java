@@ -1,8 +1,8 @@
 package claudiosoft.opusCV.image;
 
-import claudiosoft.opusCV.common.EngineType;
 import claudiosoft.opusCV.common.ErrorCode;
 import claudiosoft.opusCV.common.OpusCVException;
+import claudiosoft.opusCV.common.Provider;
 
 /**
  *
@@ -11,14 +11,14 @@ import claudiosoft.opusCV.common.OpusCVException;
 public class ImageProvider {
 
     public static Image get(String imagePath) throws OpusCVException {
-        return get(imagePath, EngineType.OPENCV);
+        return get(imagePath, Provider.OPENCV);
     }
 
-    public static Image get(String imagePath, EngineType engine) throws OpusCVException {
-        if (engine.equals(EngineType.OPENCV)) {
+    public static Image get(String imagePath, Provider provider) throws OpusCVException {
+        if (provider.equals(Provider.OPENCV)) {
             return new OpenCVImage(imagePath);
         }
-        throw new OpusCVException(ErrorCode.UNSUPPORTED_ENGINE);
+        throw new OpusCVException(ErrorCode.UNSUPPORTED_PROVIDER);
     }
 
     private ImageProvider() {

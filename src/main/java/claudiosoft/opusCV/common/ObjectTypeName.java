@@ -12,8 +12,6 @@ public enum ObjectTypeName {
 
     private String name;
 
-    public static final String OBJ_NAME_ID = "objTypeName";
-
     private ObjectTypeName(String name) {
         this.name = name;
     }

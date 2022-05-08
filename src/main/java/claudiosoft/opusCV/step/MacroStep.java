@@ -1,6 +1,6 @@
 package claudiosoft.opusCV.step;
 
-import claudiosoft.opusCV.common.EngineType;
+import claudiosoft.opusCV.common.Provider;
 import claudiosoft.opusCV.common.ObjectTypeName;
 import claudiosoft.opusCV.common.OpusCVException;
 import java.util.LinkedList;
@@ -11,6 +11,8 @@ import java.util.List;
  * @author Claudio
  */
 public class MacroStep extends BaseStep {
+
+    public static final String OBJ_SUBSTEPS = "subSteps";
 
     protected List<BaseStep> subSteps;
 
@@ -23,7 +25,7 @@ public class MacroStep extends BaseStep {
         this.category = StepCategory.MACRO;
         this.objTypeName = ObjectTypeName.MACRO_STEP.get();
         this.subSteps = subSteps;
-        this.engine = EngineType.NONE;
+        this.provider = Provider.NONE;
     }
 
     @Override
@@ -61,5 +63,9 @@ public class MacroStep extends BaseStep {
 
     public List<BaseStep> getSubSteps() {
         return subSteps;
+    }
+
+    public void setSubSteps(List<BaseStep> subSteps) {
+        this.subSteps = subSteps;
     }
 }

@@ -27,16 +27,28 @@ public class DummyStep extends BaseStep {
         this.listInt = new ArrayList();
     }
 
-    public int getCount() {
+    public int getCounter() {
         return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
     }
 
     public double getPrecision() {
         return precision;
     }
 
+    public void setPrecision(double precision) {
+        this.precision = precision;
+    }
+
     public List<Integer> getListInt() {
         return listInt;
+    }
+
+    public void setListInt(List<Integer> listInt) {
+        this.listInt = listInt;
     }
 
     @Override

@@ -46,7 +46,7 @@ public class TestJson extends BaseJUnitTest {
     public void tToJsonUtils() throws OpusCVException, IOException {
         DummyObject book = new DummyObject("Thinking in Java", "978-0131872486", 1998, new String[]{"Bruce Eckel"});
         // convert book object to JSON
-        String json = JsonUtils.toJson(book);
+        String json = JsonUtils.objToJson(book);
         Assert.assertTrue(json != null);
         System.out.println(json);
     }
@@ -54,7 +54,7 @@ public class TestJson extends BaseJUnitTest {
     @Test
     public void tToJsonUtils2() throws OpusCVException, IOException {
         DummyStep dummy = new DummyStep();
-        String json = JsonUtils.toJson(dummy);
+        String json = JsonUtils.objToJson(dummy);
         Assert.assertTrue(json != null);
         System.out.println(json);
     }
@@ -72,7 +72,7 @@ public class TestJson extends BaseJUnitTest {
                 + "  ]\n"
                 + "}";
 
-        DummyObject book = (DummyObject) JsonUtils.fromJson(json);
+        DummyObject book = (DummyObject) JsonUtils.objFromJson(json);
         Assert.assertTrue(book != null);
     }
 
@@ -86,11 +86,11 @@ public class TestJson extends BaseJUnitTest {
                 + "  \"listInt\": [],\n"
                 + "  \"type\": \"BASE\",\n"
                 + "  \"index\": 0,\n"
-                + "  \"engine\": \"OPENCV\",\n"
+                + "  \"provider\": \"OPENCV\",\n"
                 + "  \"name\": \"\"\n"
                 + "}";
 
-        DummyStep dummy = (DummyStep) JsonUtils.fromJson(json);
+        DummyStep dummy = (DummyStep) JsonUtils.objFromJson(json);
         Assert.assertTrue(dummy != null);
     }
 
