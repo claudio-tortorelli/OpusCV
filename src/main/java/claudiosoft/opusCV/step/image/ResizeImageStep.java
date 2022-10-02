@@ -1,47 +1,39 @@
-//package claudiosoft.opusCV.step.image;
-//
-//import claudiosoft.opusCV.common.OpusCVException;
-//import com.github.cliftonlabs.json_simple.JsonObject;
-//import org.opencv.core.Size;
-//import org.opencv.imgproc.Imgproc;
-//
-///**
-// *
-// * @author Claudio
-// */
-//public class ResizeImageStep extends ImageStep {
-//
-//    private Size dims;
-//    private final int MAX_PIX = 20000;
-//    private double ratio = 1.0;
-//
-////    public ResizeImageStep(double width, double height, Mat image) {
-////        super(image);
-////        //force dims between 1 and MAX_PIX
-////        this.dims = new Size(Double.min(Double.max(1.0, width), MAX_PIX), Double.min(Double.max(1, height), MAX_PIX));
-////    }
-////
-////    public ResizeImageStep(double ratio, Mat image) {
-////        super(image);
-////        this.ratio = ratio;
-////        this.dims = null;
-////    }
-//    public ResizeImageStep(JsonObject jsonIn) {
-//        super(jsonIn);
-//    }
-//
-//    @Override
-//    public void checkPrerequisites() throws OpusCVException {
-//        super.checkPrerequisites();
-//    }
-//
-//    @Override
-//    public void prepare() throws OpusCVException {
-//        super.prepare();
-//    }
-//
-//    @Override
-//    public void doProcess() throws OpusCVException {
+package claudiosoft.opusCV.step.image;
+
+import claudiosoft.opusCV.common.ObjectTypeName;
+import claudiosoft.opusCV.common.OpusCVException;
+import claudiosoft.opusCV.common.Provider;
+import claudiosoft.opusCV.step.StepCategory;
+import org.opencv.core.Size;
+
+/**
+ *
+ * @author Claudio
+ */
+public class ResizeImageStep extends ImageStep {
+
+    private Size dims;
+    private final int MAX_PIX = 20000;
+    private double ratio = 1.0;
+
+    public ResizeImageStep(double targetWidth, double targeHeight, Provider provider) {
+        super(ObjectTypeName.RESIZE_IMAGE_STEP, StepCategory.IMAGE, provider);
+        // force dims between 1 and MAX_PIX
+        this.dims = new Size(Double.min(Double.max(1.0, targetWidth), MAX_PIX), Double.min(Double.max(1, targeHeight), MAX_PIX));
+    }
+
+    @Override
+    public void checkPrerequisites() throws OpusCVException {
+        super.checkPrerequisites();
+    }
+
+    @Override
+    public void prepare() throws OpusCVException {
+        super.prepare();
+    }
+
+    @Override
+    public void doProcess() throws OpusCVException {
 //        super.doProcess();
 //        if (dims != null) {
 //            // use custom dimensions
@@ -52,11 +44,11 @@
 //            Imgproc.resize(image, image, dstSize);
 //        }
 //        logger.debug("image resized to '" + image.size().width + " x " + image.size().height);
-//    }
-//
-//    @Override
-//    public void finalize() throws OpusCVException {
-//        super.finalize();
-//    }
-//
-//}
+    }
+
+    @Override
+    public void finalize() throws OpusCVException {
+        super.finalize();
+    }
+
+}

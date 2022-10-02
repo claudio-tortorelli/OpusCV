@@ -39,7 +39,7 @@ public class TestSteps {
         List<BaseStep> steps = new LinkedList<>();
         steps.add(new DummyStep());
         steps.add(new DummyStep());
-
+        //TODO qui gestire come altri oggetti con json string
         MacroStep stepMacro = new MacroStep(steps);
         String jsonMacro = JsonUtils.objToJson(stepMacro);
         System.out.println(jsonMacro);

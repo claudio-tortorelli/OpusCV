@@ -12,12 +12,8 @@ public class OpenCVImage extends Image {
     protected Mat rawImage;
 
     public OpenCVImage(String imagePath) {
-        this(Imgcodecs.imread(imagePath));
-    }
-
-    public OpenCVImage(Mat image) {
         super();
-        this.rawImage = image;
+        this.rawImage = Imgcodecs.imread(imagePath);
         setSize(rawImage.size().width, rawImage.size().height);
         setDepth(rawImage.depth());
     }
@@ -25,5 +21,10 @@ public class OpenCVImage extends Image {
     @Override
     public Mat getRaw() {
         return rawImage;
+    }
+
+    @Override
+    public void release() {
+        rawImage.release();
     }
 }

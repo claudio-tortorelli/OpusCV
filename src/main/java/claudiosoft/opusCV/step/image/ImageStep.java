@@ -1,9 +1,12 @@
 package claudiosoft.opusCV.step.image;
 
 import claudiosoft.opusCV.common.ErrorCode;
+import claudiosoft.opusCV.common.ObjectTypeName;
 import claudiosoft.opusCV.common.OpusCVException;
+import claudiosoft.opusCV.common.Provider;
+import claudiosoft.opusCV.image.Image;
 import claudiosoft.opusCV.step.BaseStep;
-import org.opencv.core.Mat;
+import claudiosoft.opusCV.step.StepCategory;
 
 /**
  *
@@ -11,10 +14,13 @@ import org.opencv.core.Mat;
  */
 public abstract class ImageStep extends BaseStep {
 
-    protected Mat image;
+    protected Image image;
+    protected String imagePath;
 
-    public ImageStep() {
-        image = null;
+    public ImageStep(ObjectTypeName objName, StepCategory category, Provider provider) {
+        super(objName, category, provider);
+        this.imagePath = "";
+        this.image = null;
     }
 
     @Override
@@ -39,11 +45,11 @@ public abstract class ImageStep extends BaseStep {
         image.release();
     }
 
-    public Mat getImage() {
+    public Image getImage() {
         return image;
     }
 
-    public void setImage(Mat image) {
+    public void setImage(Image image) {
         this.image = image;
     }
 

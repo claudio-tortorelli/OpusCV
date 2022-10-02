@@ -95,7 +95,16 @@ public class TestJson extends BaseJUnitTest {
     }
 
     @Test
-    public void tReadProcess() {
-
+    public void tConfig() {
+        String json = "{\n"
+                + "  \"objTypeName\": \"DummyStep\",\n"
+                + "  \"counter\": 0,\n"
+                + "  \"precision\": 0.0,\n"
+                + "  \"listInt\": [],\n"
+                + "  \"type\": \"BASE\",\n"
+                + "  \"index\": 0,\n"
+                + "  \"provider\": \"OPENCV\",\n"
+                + "  \"name\": \"\"\n"
+                + "}";
     }
 }

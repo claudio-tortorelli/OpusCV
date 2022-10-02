@@ -42,4 +42,8 @@ public enum ErrorCode {
         return String.format("%s-%s", code, message);
     }
 
+    public String getCodeMessage(String msg) {
+        return String.format("%s-%s", code, msg);
+    }
+
 }

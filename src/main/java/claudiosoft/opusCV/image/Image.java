@@ -1,6 +1,6 @@
 package claudiosoft.opusCV.image;
 
-import claudiosoft.opusCV.common.Provider;
+import java.io.File;
 
 /**
  *
@@ -8,23 +8,30 @@ import claudiosoft.opusCV.common.Provider;
  */
 public abstract class Image {
 
-    protected Provider provider;
     protected String path;
     protected double[] size;
     protected int depth;
 
     public Image() {
-        this(Provider.OPENCV);
-    }
-
-    public Image(Provider provider) {
-        this.provider = provider;
+        this.path = "";
         this.size = new double[2];
         this.depth = 3;
     }
 
-    public Provider getProvider() {
-        return provider;
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public String getFileName() {
+        return new File(path).getName();
+    }
+
+    public String getAbsolutePath() {
+        return new File(path).getAbsolutePath();
     }
 
     public double[] getSize() {
@@ -49,5 +56,7 @@ public abstract class Image {
     }
 
     abstract public Object getRaw();
+
+    abstract public void release();
 
 }

@@ -7,6 +7,6 @@ package claudiosoft.opusCV.step;
 public enum StepCategory {
     BASE,
     DUMMY,
-    IMG,
+    IMAGE,
     MACRO
 }

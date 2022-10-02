@@ -8,6 +8,13 @@ import java.io.IOException;
  * TODO: creare un file recipt json con conf e steps da parsare creare step
  * container
  *
+ * la conf deve essere statica?
+ *
+ * l'image step dovrebbe avere un array di immagini e non una sola
+ *
+ * il provider di default deve essere definito nella conf e richiamato dove
+ * serve
+ *
  * @author Claudio
  */
 public class Main {

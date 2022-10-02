@@ -1,37 +1,40 @@
 package claudiosoft.opusCV.step;
 
+import claudiosoft.opusCV.common.JsonObject;
 import claudiosoft.opusCV.common.ObjectTypeName;
 import claudiosoft.opusCV.common.OpusCVException;
 import claudiosoft.opusCV.common.Provider;
 import claudiosoft.opusCV.logger.BasicConsoleLogger;
+import claudiosoft.opusCV.process.Configuration;
 
 /**
  *
  * @author Claudio
  */
-public abstract class BaseStep {
+public abstract class BaseStep extends JsonObject {
 
     private transient long startTime;
     private transient long estimatedTime;
 
     protected transient BasicConsoleLogger logger;
 
-    public static final String OBJ_TYPENAME = "objTypeName";
     public static final String OBJ_CATEGORY = "category";
-    public static final String OBJ_INDEX = "index";
     public static final String OBJ_PROVIDER = "provider";
 
-    protected String objTypeName;
     protected StepCategory category;
-    protected int index;
     protected Provider provider;
 
-    protected BaseStep() {
+    public BaseStep(ObjectTypeName objName, StepCategory category) {
+        //TODO sistema situazione della config che dovrebbe essere statica
+        //TODO anche i figli nn dovrebbero chiedere il provider nel costruttorre
+        this(objName, category, Configuration.DefaultProvider);
+    }
+
+    public BaseStep(ObjectTypeName objName, StepCategory category, Provider provider) {
+        super(objName);
         this.logger = BasicConsoleLogger.get();
-        this.category = StepCategory.BASE;
-        this.objTypeName = ObjectTypeName.BASE_STEP.get();
-        this.index = 0;
-        this.provider = Provider.OPENCV;
+        this.category = category;
+        this.provider = provider;
     }
 
     public void execute() throws OpusCVException {
@@ -55,28 +58,12 @@ public abstract class BaseStep {
 
     public abstract void finalize() throws OpusCVException;
 
-    public String getObjTypeName() {
-        return objTypeName;
-    }
-
-    public void setObjTypeName(String objTypeName) {
-        this.objTypeName = objTypeName;
-    }
-
     public StepCategory getCategory() {
         return category;
     }
 
     public void setCategory(StepCategory category) {
         this.category = category;
-    }
-
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
     }
 
     public Provider getProvider() {
