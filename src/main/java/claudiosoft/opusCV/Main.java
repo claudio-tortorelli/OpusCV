@@ -24,6 +24,12 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         try {
+//            Metadata metadata = ImageMetadataReader.readMetadata(new File("C:\\Users\\Claudio\\Desktop\\RangeRover\\VID-20221022-WA0007.mp4"));
+//            for (Directory directory : metadata.getDirectories()) {
+//                for (Tag tag : directory.getTags()) {
+//                    System.out.println(tag);
+//                }
+//            }
             //TODO parse recipt
             //TODO, enable processor's steps
             // start process

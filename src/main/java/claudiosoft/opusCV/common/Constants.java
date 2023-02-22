@@ -14,4 +14,6 @@ public class Constants {
     public static final int RET_CODE_OK = 0;
     public static final int RET_CODE_ERR = 1;
 
+    public static final int CONFIGURATION_VERSION = 1;
+
 }

@@ -3,7 +3,7 @@ package claudiosoft.opusCV.step.image;
 import claudiosoft.opusCV.common.ErrorCode;
 import claudiosoft.opusCV.common.ObjectTypeName;
 import claudiosoft.opusCV.common.OpusCVException;
-import claudiosoft.opusCV.common.Provider;
+import claudiosoft.opusCV.common.CVProvider;
 import claudiosoft.opusCV.image.Image;
 import claudiosoft.opusCV.step.BaseStep;
 import claudiosoft.opusCV.step.StepCategory;
@@ -17,7 +17,7 @@ public abstract class ImageStep extends BaseStep {
     protected Image image;
     protected String imagePath;
 
-    public ImageStep(ObjectTypeName objName, StepCategory category, Provider provider) {
+    public ImageStep(ObjectTypeName objName, StepCategory category, CVProvider provider) {
         super(objName, category, provider);
         this.imagePath = "";
         this.image = null;

@@ -1,11 +1,11 @@
 package claudiosoft.opusCV.step;
 
+import claudiosoft.opusCV.common.CVProvider;
+import claudiosoft.opusCV.common.Configuration;
 import claudiosoft.opusCV.common.JsonObject;
 import claudiosoft.opusCV.common.ObjectTypeName;
 import claudiosoft.opusCV.common.OpusCVException;
-import claudiosoft.opusCV.common.Provider;
 import claudiosoft.opusCV.logger.BasicConsoleLogger;
-import claudiosoft.opusCV.process.Configuration;
 
 /**
  *
@@ -22,15 +22,14 @@ public abstract class BaseStep extends JsonObject {
     public static final String OBJ_PROVIDER = "provider";
 
     protected StepCategory category;
-    protected Provider provider;
+    protected CVProvider provider;
 
-    public BaseStep(ObjectTypeName objName, StepCategory category) {
-        //TODO sistema situazione della config che dovrebbe essere statica
+    public BaseStep(ObjectTypeName objName, StepCategory category) throws OpusCVException {
         //TODO anche i figli nn dovrebbero chiedere il provider nel costruttorre
-        this(objName, category, Configuration.DefaultProvider);
+        this(objName, category, Configuration.getInstance().getDefaultCVProvider());
     }
 
-    public BaseStep(ObjectTypeName objName, StepCategory category, Provider provider) {
+    public BaseStep(ObjectTypeName objName, StepCategory category, CVProvider provider) {
         super(objName);
         this.logger = BasicConsoleLogger.get();
         this.category = category;
@@ -66,11 +65,11 @@ public abstract class BaseStep extends JsonObject {
         this.category = category;
     }
 
-    public Provider getProvider() {
+    public CVProvider getProvider() {
         return provider;
     }
 
-    public void setProvider(Provider provider) {
+    public void setProvider(CVProvider provider) {
         this.provider = provider;
     }
 

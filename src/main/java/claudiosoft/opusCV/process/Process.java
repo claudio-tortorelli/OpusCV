@@ -6,6 +6,7 @@ import claudiosoft.opusCV.common.ObjectTypeName;
 import claudiosoft.opusCV.common.OpusCVException;
 import claudiosoft.opusCV.logger.BasicConsoleLogger;
 import claudiosoft.opusCV.step.BaseStep;
+import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,34 +16,29 @@ import java.util.List;
  */
 public class Process extends JsonObject {
 
-    private Configuration conf;
+    private final String processFolder;
     private final List<BaseStep> steps;
     private final BasicConsoleLogger logger;
 
-    public Process(String receipt) throws OpusCVException {
+    public Process(String processFolder, String receipt) throws OpusCVException {
         super(ObjectTypeName.PROCESS);
         this.logger = BasicConsoleLogger.get();
-        this.conf = null;
+        this.processFolder = processFolder;
         this.steps = new LinkedList<>();
         fromJsonReceipt(receipt);
-        isReady();
+        validate();
     }
 
     public final List<BaseStep> getSteps() {
         return steps;
     }
 
-    public final Configuration getConf() {
-        return conf;
+    public final String getProcessFolder() {
+        return processFolder;
     }
 
     private void fromJsonReceipt(String receipt) {
-        parseConfig(receipt);
         parseSteps(receipt);
-    }
-
-    private void parseConfig(String receipt) {
-
     }
 
     private void parseSteps(String receipt) {
@@ -50,9 +46,12 @@ public class Process extends JsonObject {
 //        logger.info(step.getClass().getSimpleName() + " added to process");
     }
 
-    private void isReady() throws OpusCVException {
-        if (conf == null) {
-            throw new OpusCVException(ErrorCode.INIT_ERROR, "missing configuration", null);
+    private void validate() throws OpusCVException {
+        if (processFolder.isEmpty()) {
+            throw new OpusCVException(ErrorCode.INIT_ERROR, "missing process folder", null);
+        }
+        if (new File(processFolder).exists()) {
+            throw new OpusCVException(ErrorCode.INIT_ERROR, "process folder not found", null);
         }
         if (steps.isEmpty()) {
             throw new OpusCVException(ErrorCode.INIT_ERROR, "missing steps", null);

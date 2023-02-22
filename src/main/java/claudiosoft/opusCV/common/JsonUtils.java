@@ -1,6 +1,5 @@
 package claudiosoft.opusCV.common;
 
-import claudiosoft.opusCV.process.Configuration;
 import claudiosoft.opusCV.step.BaseStep;
 import claudiosoft.opusCV.step.MacroStep;
 import claudiosoft.opusCV.step.StepCategory;
@@ -48,7 +47,7 @@ public class JsonUtils {
             JsonObject jsonMacroObject = gson.fromJson(json, JsonObject.class);
             MacroStep macro = new MacroStep(ObjectTypeName.valueOf(jsonMacroObject.get(BaseStep.OBJ_TYPENAME).getAsString()),
                     StepCategory.valueOf(jsonMacroObject.get(BaseStep.OBJ_CATEGORY).getAsString()),
-                    Provider.valueOf(jsonMacroObject.get(BaseStep.OBJ_PROVIDER).getAsString()));
+                    CVProvider.valueOf(jsonMacroObject.get(BaseStep.OBJ_PROVIDER).getAsString()));
             JsonElement objSubSteps = jsonMacroObject.get(MacroStep.OBJ_SUBSTEPS);
             if (objSubSteps == null) {
                 throw new OpusCVException(ErrorCode.INCOMPLETE_MACRO_OBJ);

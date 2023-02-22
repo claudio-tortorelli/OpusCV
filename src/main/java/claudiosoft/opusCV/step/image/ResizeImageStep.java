@@ -2,7 +2,7 @@ package claudiosoft.opusCV.step.image;
 
 import claudiosoft.opusCV.common.ObjectTypeName;
 import claudiosoft.opusCV.common.OpusCVException;
-import claudiosoft.opusCV.common.Provider;
+import claudiosoft.opusCV.common.CVProvider;
 import claudiosoft.opusCV.step.StepCategory;
 import org.opencv.core.Size;
 
@@ -16,7 +16,7 @@ public class ResizeImageStep extends ImageStep {
     private final int MAX_PIX = 20000;
     private double ratio = 1.0;
 
-    public ResizeImageStep(double targetWidth, double targeHeight, Provider provider) {
+    public ResizeImageStep(double targetWidth, double targeHeight, CVProvider provider) {
         super(ObjectTypeName.RESIZE_IMAGE_STEP, StepCategory.IMAGE, provider);
         // force dims between 1 and MAX_PIX
         this.dims = new Size(Double.min(Double.max(1.0, targetWidth), MAX_PIX), Double.min(Double.max(1, targeHeight), MAX_PIX));

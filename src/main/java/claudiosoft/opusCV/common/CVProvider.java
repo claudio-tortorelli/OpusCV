@@ -4,7 +4,7 @@ package claudiosoft.opusCV.common;
  *
  * @author Claudio
  */
-public enum Provider {
+public enum CVProvider {
     OPENCV,
     OTHER,
     NONE

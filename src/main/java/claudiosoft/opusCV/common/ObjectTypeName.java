@@ -11,7 +11,6 @@ public enum ObjectTypeName {
     IMAGE_STEP("ImageStep"),
     RESIZE_IMAGE_STEP("ResizeImageStep"),
     PROCESS("Process"),
-    CONFIGURATION("Configuration"),
     MACRO_STEP("MacroStep");
 
     private String name;

@@ -2,7 +2,7 @@ package claudiosoft.opusCV.image;
 
 import claudiosoft.opusCV.common.ErrorCode;
 import claudiosoft.opusCV.common.OpusCVException;
-import claudiosoft.opusCV.common.Provider;
+import claudiosoft.opusCV.common.CVProvider;
 
 /**
  *
@@ -11,11 +11,11 @@ import claudiosoft.opusCV.common.Provider;
 public class ImageProvider {
 
     public static Image get(String imagePath) throws OpusCVException {
-        return get(imagePath, Provider.OPENCV);
+        return get(imagePath, CVProvider.OPENCV);
     }
 
-    public static Image get(String imagePath, Provider provider) throws OpusCVException {
-        if (provider.equals(Provider.OPENCV)) {
+    public static Image get(String imagePath, CVProvider provider) throws OpusCVException {
+        if (provider.equals(CVProvider.OPENCV)) {
             return new OpenCVImage(imagePath);
         }
         throw new OpusCVException(ErrorCode.UNSUPPORTED_PROVIDER);
