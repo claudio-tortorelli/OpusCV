@@ -6,6 +6,8 @@ package claudiosoft.opusCV.common;
  */
 public class OpusCVException extends Exception {
 
+    private ErrorCode code;
+
     public OpusCVException(ErrorCode errCode) {
         this(errCode, null, null);
     }
@@ -16,6 +18,11 @@ public class OpusCVException extends Exception {
 
     public OpusCVException(ErrorCode errCode, String msg, Throwable ex) {
         super(msg != null ? errCode.getCodeMessage(msg) : errCode.getCodeMessage(), ex);
+        code = errCode;
+    }
+
+    public ErrorCode getCode() {
+        return code;
     }
 
 }

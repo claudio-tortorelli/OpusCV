@@ -1,19 +1,14 @@
 package claudiosoft.opusCV;
 
+import claudiosoft.opusCV.common.Configuration;
 import claudiosoft.opusCV.common.Constants;
 import claudiosoft.opusCV.logger.BasicConsoleLogger;
+import java.io.File;
 import java.io.IOException;
 
 /**
- * TODO: creare un file recipt json con conf e steps da parsare creare step
- * container
+ * TODO l'image step dovrebbe avere un array di immagini e non una sola
  *
- * la conf deve essere statica?
- *
- * l'image step dovrebbe avere un array di immagini e non una sola
- *
- * il provider di default deve essere definito nella conf e richiamato dove
- * serve
  *
  * @author Claudio
  */
@@ -24,14 +19,15 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         try {
-//            Metadata metadata = ImageMetadataReader.readMetadata(new File("C:\\Users\\Claudio\\Desktop\\RangeRover\\VID-20221022-WA0007.mp4"));
-//            for (Directory directory : metadata.getDirectories()) {
-//                for (Tag tag : directory.getTags()) {
-//                    System.out.println(tag);
-//                }
-//            }
-            //TODO parse recipt
-            //TODO, enable processor's steps
+            File confFile = null;
+            if (args.length > 0 && args[0].toLowerCase().startsWith("conf=")) {
+                confFile = new File(args[0].substring("conf=".length()));
+                if (!confFile.exists()) {
+                    throw new IOException("config file not found");
+                }
+            }
+            Configuration.initialize(confFile);
+
             // start process
             //new Processor().doProcess();
         } catch (Exception ex) {
@@ -40,4 +36,5 @@ public class Main {
         }
         System.exit(Constants.RET_CODE_OK);
     }
+
 }

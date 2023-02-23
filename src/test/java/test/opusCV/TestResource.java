@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.JarURLConnection;
 import java.net.URL;
+import java.nio.file.Files;
 
 /**
  *
@@ -75,6 +76,7 @@ public class TestResource {
             if (destFolder == null || destFolder.isEmpty()) {
                 destFolder = BaseJUnitTest.getOutFolder();
             }
+            Files.createDirectory(new File(destFolder).toPath());
             if (fileName == null || fileName.isEmpty()) {
                 int slashIndex = resourcePath.lastIndexOf("/");
                 if (slashIndex < 0) {
@@ -127,6 +129,7 @@ public class TestResource {
         if (fileName == null || fileName.isEmpty()) {
             throw new IOException("Output file name not defined!");
         }
+        Files.createDirectory(new File(destFolder).toPath());
         return new File(String.format("%s%s%s", destFolder, File.separator, fileName));
     }
 

@@ -1,5 +1,10 @@
 package claudiosoft.opusCV.common;
 
+import com.drew.imaging.ImageMetadataReader;
+import com.drew.imaging.ImageProcessingException;
+import com.drew.metadata.Directory;
+import com.drew.metadata.Metadata;
+import com.drew.metadata.Tag;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -10,6 +15,8 @@ import java.nio.file.StandardCopyOption;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.TimeZone;
 
 /**
@@ -80,6 +87,23 @@ public class Utils {
             return OS.WINDOWS;
         }
         return OS.UNKNOWN;
+    }
+
+    /**
+     * https://github.com/drewnoakes/metadata-extractor/wiki/Getting-Started-(Java)
+     *
+     * @throws ImageProcessingException
+     * @throws IOException
+     */
+    public static List<String> getMetadata(File mediaFile) throws ImageProcessingException, IOException {
+        List<String> extractedValues = new LinkedList<>();
+        Metadata metadata = ImageMetadataReader.readMetadata(mediaFile);
+        for (Directory directory : metadata.getDirectories()) {
+            for (Tag tag : directory.getTags()) {
+                extractedValues.add(tag.toString());
+            }
+        }
+        return extractedValues;
     }
 
     //    public static Options parseArgs(String[] args) {
