@@ -25,8 +25,7 @@ public abstract class BaseStep extends JsonObject {
     protected CVProvider provider;
 
     public BaseStep(ObjectTypeName objName, StepCategory category) throws OpusCVException {
-        //TODO anche i figli nn dovrebbero chiedere il provider nel costruttorre
-        this(objName, category, Configuration.getInstance().getDefaultCVProvider());
+        this(objName, category, Configuration.get().getDefaultCVProvider());
     }
 
     public BaseStep(ObjectTypeName objName, StepCategory category, CVProvider provider) {

@@ -1,19 +1,10 @@
-//package claudiosoft.opusCV.step.image;
-//
-//import claudiosoft.opusCV.common.OpusCVException;
-//import com.github.cliftonlabs.json_simple.JsonObject;
-//import org.opencv.core.Core;
-//import org.opencv.core.Point;
-//import org.opencv.core.Scalar;
-//import org.opencv.highgui.HighGui;
-//import org.opencv.imgproc.Imgproc;
-//
-///**
-// *
-// * @author Claudio
-// */
+package claudiosoft.opusCV.step.image;
+
+/**
+ *
+ * @author Claudio
+ */
 //public class ShowImageStep extends ImageStep {
-//
 //    private String windowName;
 //    private int frameRate;
 //    private WinType winType;
@@ -23,21 +14,20 @@
 //        NORMAL,
 //        AUTOSIZE
 //    }
+//    public ShowImageStep(String windowName, Mat image) {
+//        this(windowName, WinType.NORMAL, 24, image);
+//    }
 //
-////    public ShowImageStep(String windowName, Mat image) {
-////        this(windowName, WinType.NORMAL, 24, image);
-////    }
-////
-////    public ShowImageStep(String windowName, WinType winType, Mat image) {
-////        this(windowName, winType, 24, image);
-////    }
-////
-////    public ShowImageStep(String windowName, WinType winType, int frameRate, Mat image) {
-////        super(image);
-////        this.windowName = windowName;
-////        this.winType = winType;
-////        this.frameRate = Integer.max(0, frameRate);
-////    }
+//    public ShowImageStep(String windowName, WinType winType, Mat image) {
+//        this(windowName, winType, 24, image);
+//    }
+//
+//    public ShowImageStep(String windowName, WinType winType, int frameRate, Mat image) {
+//        super(image);
+//        this.windowName = windowName;
+//        this.winType = winType;
+//        this.frameRate = Integer.max(0, frameRate);
+//    }
 //    public ShowImageStep(JsonObject jsonIn) {
 //        super(jsonIn);
 //    }
@@ -91,5 +81,4 @@
 //    public void setText(String text) {
 //        this.text = text;
 //    }
-//
 //}

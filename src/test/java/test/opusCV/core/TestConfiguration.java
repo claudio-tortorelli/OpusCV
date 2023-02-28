@@ -31,7 +31,7 @@ public class TestConfiguration extends BaseJUnitTest {
     @Test
     public void tConfDefaultInit() throws IOException, OpusCVException {
         Configuration.initialize();
-        Assert.assertTrue(Configuration.getInstance().getDefaultCVProvider() == CVProvider.OPENCV);
+        Assert.assertTrue(Configuration.get().getDefaultCVProvider() == CVProvider.OPENCV);
     }
 
     @Test
@@ -43,7 +43,7 @@ public class TestConfiguration extends BaseJUnitTest {
     @Test
     public void tConfFileInit() throws IOException, OpusCVException {
         Configuration.initialize(TestResource.extractToFile("sampleConf/opuscv.properties"));
-        Assert.assertTrue(Configuration.getInstance().getVersion() == 2);
+        Assert.assertTrue(Configuration.get().getVersion() == 2);
     }
 
 }

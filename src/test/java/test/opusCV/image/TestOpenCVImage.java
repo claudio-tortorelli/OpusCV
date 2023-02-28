@@ -38,7 +38,7 @@ public class TestOpenCVImage extends BaseJUnitTest {
         Assume.assumeTrue("sample image present", sampleImage != null);
         Assume.assumeTrue("opencv loaded", OpenCVNative.isLoaded());
 
-        OpenCVImage image = (OpenCVImage) ImageProvider.get(sampleImage.getAbsolutePath(), CVProvider.OPENCV);
+        OpenCVImage image = (OpenCVImage) ImageProvider.get().image(sampleImage.getAbsolutePath(), CVProvider.OPENCV);
         Assert.assertTrue(image != null);
         Assert.assertTrue(image.getRaw().width() == 1024.0 && image.getRaw().height() == 640.0);
     }

@@ -21,14 +21,14 @@ public class Configuration {
     }
 
     public static Configuration initialize(File confFile) throws IOException {
-        if (conf != null) {
+        if (confFile == null && conf != null) {
             return conf;
         }
         conf = new Configuration(confFile);
         return conf;
     }
 
-    public static Configuration getInstance() throws OpusCVException {
+    public static Configuration get() throws OpusCVException {
         if (conf == null) {
             throw new OpusCVException(ErrorCode.INIT_ERROR, "configuration not initialized", null);
         }

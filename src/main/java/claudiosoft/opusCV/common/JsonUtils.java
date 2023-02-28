@@ -58,8 +58,6 @@ public class JsonUtils {
                 macro.getSubSteps().add((BaseStep) objFromJson(jsonSubStep, subObjNameId));
             }
             return macro;
-        } else if (Configuration.class.getSimpleName().equals(typeStr)) {
-            return (Configuration) gson.fromJson(json, Configuration.class);
         } else if (ResizeImageStep.class.getSimpleName().equals(typeStr)) {
             return (ResizeImageStep) gson.fromJson(json, ResizeImageStep.class);
         }
