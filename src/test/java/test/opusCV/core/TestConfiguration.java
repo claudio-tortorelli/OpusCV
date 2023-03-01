@@ -7,6 +7,7 @@ import claudiosoft.opusCV.common.CVProvider;
 import claudiosoft.opusCV.common.Configuration;
 import claudiosoft.opusCV.common.OpusCVException;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -29,19 +30,19 @@ public class TestConfiguration extends BaseJUnitTest {
     }
 
     @Test
-    public void tConfDefaultInit() throws IOException, OpusCVException {
+    public void tConfDefaultInit() throws IOException, OpusCVException, URISyntaxException {
         Configuration.initialize();
         Assert.assertTrue(Configuration.get().getDefaultCVProvider() == CVProvider.OPENCV);
     }
 
     @Test
-    public void tConfDoubleInit() throws IOException {
+    public void tConfDoubleInit() throws IOException, URISyntaxException {
         Configuration.initialize();
         Configuration.initialize();
     }
 
     @Test
-    public void tConfFileInit() throws IOException, OpusCVException {
+    public void tConfFileInit() throws IOException, OpusCVException, URISyntaxException {
         Configuration.initialize(TestResource.extractToFile("sampleConf/opuscv.properties"));
         Assert.assertTrue(Configuration.get().getVersion() == 2);
     }

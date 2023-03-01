@@ -19,6 +19,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         try {
+            //TODO parse utils
             File confFile = null;
             if (args.length > 0 && args[0].toLowerCase().startsWith("conf=")) {
                 confFile = new File(args[0].substring("conf=".length()));
@@ -28,6 +29,7 @@ public class Main {
             }
             Configuration.initialize(confFile);
 
+            //parse process file
             // start process
             //new Processor().doProcess();
         } catch (Exception ex) {

@@ -16,6 +16,10 @@ public class OpusCVException extends Exception {
         this(errCode, null, ex);
     }
 
+    public OpusCVException(ErrorCode errCode, String msg) {
+        this(errCode, msg, null);
+    }
+
     public OpusCVException(ErrorCode errCode, String msg, Throwable ex) {
         super(msg != null ? errCode.getCodeMessage(msg) : errCode.getCodeMessage(), ex);
         code = errCode;

@@ -2,6 +2,7 @@ package claudiosoft.opusCV.common;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 
 /**
@@ -15,12 +16,13 @@ public class Configuration {
 
     private int version;
     private CVProvider defaultCVProvider;
+    private String processFolder;
 
-    public static Configuration initialize() throws IOException {
+    public static Configuration initialize() throws IOException, URISyntaxException {
         return initialize(null);
     }
 
-    public static Configuration initialize(File confFile) throws IOException {
+    public static Configuration initialize(File confFile) throws IOException, URISyntaxException {
         if (confFile == null && conf != null) {
             return conf;
         }
@@ -35,10 +37,11 @@ public class Configuration {
         return conf;
     }
 
-    private Configuration(File confFile) throws IOException {
+    private Configuration(File confFile) throws IOException, URISyntaxException {
         // default conf
         this.version = Constants.CONFIGURATION_VERSION;
         this.defaultCVProvider = CVProvider.OPENCV;
+        this.processFolder = new File(Configuration.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile().getAbsolutePath();
 
         if (confFile == null) {
             return;
@@ -50,6 +53,8 @@ public class Configuration {
                 this.version = Integer.parseInt(line.substring(ConfigurationEntries.CONF_VER.length() + 1));
             } else if (line.startsWith(ConfigurationEntries.DEFAULT_CV_PROVIDER)) {
                 this.defaultCVProvider = retrieveCVProvider(line.substring(ConfigurationEntries.DEFAULT_CV_PROVIDER.length() + 1));
+            } else if (line.startsWith(ConfigurationEntries.PROCESS_FOLDER)) {
+                this.processFolder = line.substring(ConfigurationEntries.PROCESS_FOLDER.length() + 1);
             }
         }
     }
@@ -70,4 +75,9 @@ public class Configuration {
     public CVProvider getDefaultCVProvider() {
         return defaultCVProvider;
     }
+
+    public String getProcessFolder() {
+        return processFolder;
+    }
+
 }

@@ -1,11 +1,9 @@
 package claudiosoft.opusCV.process;
 
+import claudiosoft.opusCV.common.Configuration;
 import claudiosoft.opusCV.common.ErrorCode;
-import claudiosoft.opusCV.common.JsonObject;
-import claudiosoft.opusCV.common.ObjectTypeName;
 import claudiosoft.opusCV.common.OpusCVException;
 import claudiosoft.opusCV.logger.BasicConsoleLogger;
-import claudiosoft.opusCV.step.BaseStep;
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,22 +12,28 @@ import java.util.List;
  *
  * @author Claudio
  */
-public class Process extends JsonObject {
+public class Process {
 
     private final String processFolder;
-    private final List<BaseStep> steps;
+    private final List<ProcessStep> steps;
     private final BasicConsoleLogger logger;
+    private short stepCount;
 
-    public Process(String processFolder, String receipt) throws OpusCVException {
-        super(ObjectTypeName.PROCESS);
+    public Process(File processFile) throws OpusCVException {
+        this(processFile, Configuration.get().getProcessFolder());
+    }
+
+    public Process(File processFile, String processFolder) throws OpusCVException {
         this.logger = BasicConsoleLogger.get();
         this.processFolder = processFolder;
         this.steps = new LinkedList<>();
-        fromJsonReceipt(receipt);
+        this.stepCount = 1;
+
+        parseSteps(processFile);
         validate();
     }
 
-    public final List<BaseStep> getSteps() {
+    public final List<ProcessStep> getSteps() {
         return steps;
     }
 
@@ -37,13 +41,11 @@ public class Process extends JsonObject {
         return processFolder;
     }
 
-    private void fromJsonReceipt(String receipt) {
-        parseSteps(receipt);
-    }
-
-    private void parseSteps(String receipt) {
-//        steps.add(step);
-//        logger.info(step.getClass().getSimpleName() + " added to process");
+    private void parseSteps(File processFile) {
+        logger.info("start parsing process");
+        //TODO parse
+        //logger.info(step.getClass().getSimpleName() + " added to process");
+        logger.info("end parsing process");
     }
 
     private void validate() throws OpusCVException {
