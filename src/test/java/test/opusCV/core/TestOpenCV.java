@@ -3,6 +3,7 @@
  */
 package test.opusCV.core;
 
+import claudiosoft.opusCV.common.OpusCVException;
 import claudiosoft.opusCV.logger.BasicConsoleLogger;
 import claudiosoft.opusCV.step.core.OpenCVNative;
 import java.io.IOException;
@@ -30,7 +31,7 @@ public class TestOpenCV extends BaseJUnitTest {
     }
 
     @Test
-    public void tCheckOpenCVAvailable() throws IOException, InterruptedException {
+    public void tCheckOpenCVAvailable() throws IOException, InterruptedException, OpusCVException {
         Assume.assumeTrue("opencv loaded", OpenCVNative.isLoaded());
         Mat mat = Mat.eye(3, 3, CvType.CV_8UC1);
         Assert.assertTrue(mat != null);

@@ -28,7 +28,11 @@ public class OpenCVNative {
             System.load(nativeTemp.getAbsolutePath());
             isReady = true;
         } catch (Exception ex) {
-            BasicConsoleLogger.get().error(ex.getMessage(), ex);
+            try {
+                BasicConsoleLogger.get().error(ex.getMessage(), ex);
+            } catch (OpusCVException ex1) {
+
+            }
         } finally {
 
         }

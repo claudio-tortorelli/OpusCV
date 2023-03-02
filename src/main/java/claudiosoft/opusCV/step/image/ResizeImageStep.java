@@ -19,7 +19,7 @@ import org.opencv.imgproc.Imgproc;
 public class ResizeImageStep extends ImageStep {
 
     private final Size destSize;
-    private final int MAX_PIX = 20000;
+    private final int MAX_PIX;
 
     public ResizeImageStep(Image targetImage, double targetWidth, double targeHeight) throws OpusCVException {
         this(targetImage.getPath(), targetWidth, targeHeight, Configuration.get().getDefaultCVProvider());
@@ -35,6 +35,7 @@ public class ResizeImageStep extends ImageStep {
 
     public ResizeImageStep(String imagePath, double targetWidth, double targeHeight, CVProvider provider) throws OpusCVException {
         super(ObjectTypeName.RESIZE_IMAGE_STEP, StepCategory.IMAGE, provider);
+        this.MAX_PIX = 20000;
         image = ImageProvider.get().image(imagePath, provider);
         // force dims between 1 and MAX_PIX
         destSize = new Size(Double.min(Double.max(1.0, targetWidth), MAX_PIX), Double.min(Double.max(1, targeHeight), MAX_PIX));

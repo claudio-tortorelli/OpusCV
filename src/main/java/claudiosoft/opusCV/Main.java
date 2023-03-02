@@ -14,11 +14,12 @@ import java.io.IOException;
  */
 public class Main {
 
-    private static BasicConsoleLogger logger = BasicConsoleLogger.get();
+    private static BasicConsoleLogger logger;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         try {
+            logger = BasicConsoleLogger.get();
             //TODO parse utils
             File confFile = null;
             if (args.length > 0 && args[0].toLowerCase().startsWith("conf=")) {

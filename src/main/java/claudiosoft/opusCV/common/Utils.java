@@ -16,6 +16,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.JarURLConnection;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import static java.nio.file.Files.newBufferedReader;
@@ -141,6 +142,10 @@ public class Utils {
         } catch (IOException ioe) {
             // ignore
         }
+    }
+
+    public static String getJarFolder() throws URISyntaxException {
+        return new File(Utils.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile().getAbsolutePath();
     }
 
     public static byte[] getSHA256(String text) throws NoSuchAlgorithmException {

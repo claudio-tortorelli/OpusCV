@@ -11,7 +11,7 @@ public class Processor {
 
     private final BasicConsoleLogger logger;
 
-    public Processor() {
+    public Processor() throws OpusCVException {
         this.logger = BasicConsoleLogger.get();
     }
 

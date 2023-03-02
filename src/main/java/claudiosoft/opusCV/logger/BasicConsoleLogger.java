@@ -1,5 +1,7 @@
 package claudiosoft.opusCV.logger;
 
+import claudiosoft.opusCV.common.Configuration;
+import claudiosoft.opusCV.common.OpusCVException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,16 +20,16 @@ public class BasicConsoleLogger {
         NORMAL,
         DEBUG
     }
-    private Logger internalLogger = null;
-    private LogLevel level = LogLevel.NORMAL;
+    private final Logger internalLogger;
+    private final LogLevel level;
     private static BasicConsoleLogger consoleLogger = null;
 
-    public static BasicConsoleLogger get() {
-        return get(LogLevel.NORMAL);
+    public static BasicConsoleLogger get() throws OpusCVException {
+        return get(Configuration.get().getLogLevel());
     }
 
-    public static BasicConsoleLogger get(LogLevel level) {
-        return get(LogLevel.NORMAL, "Logger");
+    public static BasicConsoleLogger get(LogLevel level) throws OpusCVException {
+        return get(Configuration.get().getLogLevel(), "OpusLogger");
     }
 
     public static BasicConsoleLogger get(LogLevel level, String logName) {

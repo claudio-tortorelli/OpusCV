@@ -1,8 +1,8 @@
 package claudiosoft.opusCV.step.dummy;
 
+import claudiosoft.opusCV.common.CVProvider;
 import claudiosoft.opusCV.common.ObjectTypeName;
 import claudiosoft.opusCV.common.OpusCVException;
-import claudiosoft.opusCV.common.CVProvider;
 import claudiosoft.opusCV.step.BaseStep;
 import claudiosoft.opusCV.step.StepCategory;
 import java.io.IOException;
@@ -19,7 +19,7 @@ public class DummyStep extends BaseStep {
     protected double precision;
     protected List<Integer> listInt;
 
-    public DummyStep() throws IOException {
+    public DummyStep() throws IOException, OpusCVException {
         super(ObjectTypeName.DUMMY_STEP, StepCategory.DUMMY, CVProvider.NONE);
         this.counter = 0;
         this.precision = 0.0;

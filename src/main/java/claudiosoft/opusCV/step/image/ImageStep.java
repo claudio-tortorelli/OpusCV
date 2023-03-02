@@ -20,7 +20,7 @@ public abstract class ImageStep extends BaseStep {
         this(objName, category, Configuration.get().getDefaultCVProvider());
     }
 
-    public ImageStep(ObjectTypeName objName, StepCategory category, CVProvider provider) {
+    public ImageStep(ObjectTypeName objName, StepCategory category, CVProvider provider) throws OpusCVException {
         super(objName, category, provider);
     }
 

@@ -28,7 +28,7 @@ public abstract class BaseStep extends JsonObject {
         this(objName, category, Configuration.get().getDefaultCVProvider());
     }
 
-    public BaseStep(ObjectTypeName objName, StepCategory category, CVProvider provider) {
+    public BaseStep(ObjectTypeName objName, StepCategory category, CVProvider provider) throws OpusCVException {
         super(objName);
         this.logger = BasicConsoleLogger.get();
         this.category = category;

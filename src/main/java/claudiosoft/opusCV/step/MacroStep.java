@@ -1,8 +1,8 @@
 package claudiosoft.opusCV.step;
 
+import claudiosoft.opusCV.common.CVProvider;
 import claudiosoft.opusCV.common.ObjectTypeName;
 import claudiosoft.opusCV.common.OpusCVException;
-import claudiosoft.opusCV.common.CVProvider;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class MacroStep extends BaseStep {
 
     protected List<BaseStep> subSteps;
 
-    public MacroStep(ObjectTypeName objName, StepCategory category, CVProvider provider) {
+    public MacroStep(ObjectTypeName objName, StepCategory category, CVProvider provider) throws OpusCVException {
         super(objName, category, provider);
         this.subSteps = new LinkedList<>();
     }

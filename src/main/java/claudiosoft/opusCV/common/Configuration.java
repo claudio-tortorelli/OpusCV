@@ -1,5 +1,6 @@
 package claudiosoft.opusCV.common;
 
+import claudiosoft.opusCV.logger.BasicConsoleLogger.LogLevel;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -17,6 +18,7 @@ public class Configuration {
     private int version;
     private CVProvider defaultCVProvider;
     private String processFolder;
+    private LogLevel logLevel;
 
     public static Configuration initialize() throws IOException, URISyntaxException {
         return initialize(null);
@@ -41,7 +43,8 @@ public class Configuration {
         // default conf
         this.version = Constants.CONFIGURATION_VERSION;
         this.defaultCVProvider = CVProvider.OPENCV;
-        this.processFolder = new File(Configuration.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile().getAbsolutePath();
+        this.processFolder = Utils.getJarFolder();
+        this.logLevel = LogLevel.NORMAL;
 
         if (confFile == null) {
             return;
@@ -55,7 +58,10 @@ public class Configuration {
                 this.defaultCVProvider = retrieveCVProvider(line.substring(ConfigurationEntries.DEFAULT_CV_PROVIDER.length() + 1));
             } else if (line.startsWith(ConfigurationEntries.PROCESS_FOLDER)) {
                 this.processFolder = line.substring(ConfigurationEntries.PROCESS_FOLDER.length() + 1);
+            } else if (line.startsWith(ConfigurationEntries.LOG_LEVEL)) {
+                this.logLevel = LogLevel.valueOf(line.substring(ConfigurationEntries.LOG_LEVEL.length() + 1));
             }
+
         }
     }
 
@@ -78,6 +84,10 @@ public class Configuration {
 
     public String getProcessFolder() {
         return processFolder;
+    }
+
+    public LogLevel getLogLevel() {
+        return logLevel;
     }
 
 }
