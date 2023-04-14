@@ -20,7 +20,11 @@ import org.junit.runners.MethodSorters;
 import test.opusCV.BaseJUnitTest;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TestOpenCVImage extends BaseJUnitTest {
+public class TOpenCVImage extends BaseJUnitTest {
+
+    public TOpenCVImage() {
+        super(false, false);
+    }
 
     @BeforeClass
     public static void setUpClass() {

@@ -1,12 +1,23 @@
 package test.opusCV.json;
 
+import claudiosoft.opusCV.common.OpusCVException;
+import java.io.IOException;
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
+import org.junit.runners.MethodSorters;
+import test.opusCV.BaseJUnitTest;
 
 /**
  *
  * @author Claudio
  */
-public class TestSteps {
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class TSteps extends BaseJUnitTest {
+
+    public TSteps() {
+        super(false, false);
+    }
 
     @BeforeClass
     public static void setUpClass() {
@@ -24,8 +35,8 @@ public class TestSteps {
      * @throws OpusCVException
      * @throws IOException
      */
-//    @Test
-//    public void tMacroStep() throws OpusCVException, IOException {
+    @Test
+    public void tMacroStep() throws OpusCVException, IOException {
 //        List<BaseStep> steps = new LinkedList<>();
 //        steps.add(new DummyStep());
 //        steps.add(new DummyStep());
@@ -39,5 +50,5 @@ public class TestSteps {
 //        String firstJson = JsonUtils.objToJson(stepMacro);
 //        String secondJson = JsonUtils.objToJson(stepMacro2);
 //        Assert.assertTrue(firstJson.equals(secondJson));
-//    }
+    }
 }

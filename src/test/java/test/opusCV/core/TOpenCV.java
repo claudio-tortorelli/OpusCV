@@ -18,7 +18,11 @@ import org.opencv.core.Mat;
 import test.opusCV.BaseJUnitTest;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TestOpenCV extends BaseJUnitTest {
+public class TOpenCV extends BaseJUnitTest {
+
+    public TOpenCV() {
+        super(false, false);
+    }
 
     @BeforeClass
     public static void setUpClass() {

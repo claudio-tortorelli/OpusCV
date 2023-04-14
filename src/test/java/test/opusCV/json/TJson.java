@@ -21,7 +21,11 @@ import test.opusCV.BaseJUnitTest;
  * @author Claudio
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TestJson extends BaseJUnitTest {
+public class TJson extends BaseJUnitTest {
+
+    public TJson() {
+        super(false, false);
+    }
 
     @BeforeClass
     public static void setUpClass() {

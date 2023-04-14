@@ -17,7 +17,11 @@ import test.opusCV.BaseJUnitTest;
 import test.opusCV.TestResource;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TestConfiguration extends BaseJUnitTest {
+public class TConfiguration extends BaseJUnitTest {
+
+    public TConfiguration() {
+        super(false, false);
+    }
 
     @BeforeClass
     public static void setUpClass() {
